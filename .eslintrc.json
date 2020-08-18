@@ -18,6 +18,7 @@
         "indent":[
             "error","tab"
         ],
+        "linebreak-style": ["error", "windows"],
         "no-shadow": "off",
         "no-use-before-define":"off",
         "no-undef": "off",
