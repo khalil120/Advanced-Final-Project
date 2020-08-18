@@ -1,4 +1,4 @@
-/** !
+/* eslint-disable *//** !
  * @fileOverview Kickass library to create and place poppers near their reference elements.
  * @version 1.1.5
  * @license
@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/* eslint-disable */
+
 (function(global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('popper.js')) :
         typeof define === 'function' && define.amd ? define(['popper.js'], factory) :
