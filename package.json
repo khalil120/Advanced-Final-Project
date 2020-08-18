@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "nodemon server.js",
         "start1": "node server.js",
+        "test": "eslint .",
         "start": "npm run start1"
     },
     "repository": {
@@ -26,6 +27,17 @@
         "mongodb": "^3.6.0"
     },
     "devDependencies": {
+        "eslint": "^7.7.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.22.0",
+        "husky": "^4.2.5",
         "nodemon": "^2.0.4"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm test",
+            "pre-push": "npm test"
+        }
     }
+
 }
