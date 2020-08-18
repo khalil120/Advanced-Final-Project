@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const authRouter = require('./routes/auth');
@@ -27,4 +27,7 @@ app.get('/', (req, res) => {
 
 app.get('/login', anonymouse, (req, res) => {
 	fs.createReadStream('./client/login.html').pipe(res);
+});
+app.get('/register', anonymouse, (req, res) => {
+	fs.createReadStream('./client/reg.html').pipe(res);
 });
