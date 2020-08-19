@@ -18,7 +18,7 @@ function addUser(res, username, password, email) {
 		const db = client.db(dbName2);
 		const collection = db.collection('users');
 
-		collection.findOne({ username }, (err, user) => {
+		collection.findOne({ email }, (err, user) => {
 			if (err) {
 				console.log('error in finding doc:', err);
 				client.close();
@@ -46,13 +46,13 @@ function addUser(res, username, password, email) {
 	});
 }
 
-function checkUserName(res, username, password) {
+function checkUserName(res, email, password) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		assert.equal(null, err);
 		const db = client.db(dbName2);
 		const collection = db.collection('users');
 		// what to do with email ?
-		collection.findOne({ username }, (err, user) => {
+		collection.findOne({ email }, (err, user) => {
 			if (err) {
 				console.log('error in finding doc:', err);
 				client.close();
@@ -80,14 +80,16 @@ function checkUserName(res, username, password) {
 }
 
 router.post('/login', (req, res) => {
+	console.log('welcome ');
 	if (!req.body) { // make sure request body exist
 		return res.sendStatus(400);
 	}
-	const { username, password } = req.body;
-	checkUserName(res, username, password);
+	const { email, password } = req.body;
+	checkUserName(res, email, password);
 });
 router.post('/register', (req, res) => {
 	// make sure request body exist
+	console.log('welcome ');
 	if (!req.body) {
 		return res.sendStatus(400);
 	}
