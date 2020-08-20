@@ -12,35 +12,39 @@
 				check = false;
 			}
 		}
-		/*
+
 		event.preventDefault();
-        		if (check) {
-        			let data;
-        			let url;
-        			const password = $('input[name=pass]').val().trim();
-        			const email = $('input[name=email]').val().trim();
-        			if (input.length == 2) {
-        				url = '/login';
-        				data = {
-        					password,
-        					email,
-        				};
-        			} else {
-        				url = '/register';
-        				const username = $('input[name=user]').val().trim();
-        				data = {
-        					password,
-        					email,
-        					username,
-        				};
-        			}
-        			$.post(url, data, 'json').done((res) => {
-        				alert(`welcome ${data.email}`);
-        				location.href = '/';
-        			}).fail((res) => {
-        				alert('bad user password try again !');
-        			});
-        		} */
+		if (check) {
+			let data;
+			let url;
+			const password = $('input[name=pass]').val().trim();
+			const email = $('input[name=email]').val().trim();
+			if (input.length == 2) {
+				url = '/login';
+				data = {
+					password,
+					email,
+				};
+			} else {
+				url = '/register';
+				const username = $('input[name=user]').val().trim();
+				data = {
+					password,
+					email,
+					username,
+				};
+			}
+			$.post(url, data, 'json').done((res) => {
+				alert(`welcome ${data.email}`);
+				location.href = '/';
+			}).fail((res) => {
+				if (url === '/login') {
+					alert('wrong password try again !');
+				} else {
+					alert(`${email}: exists try another email !`);
+				}
+			});
+		}
 		return check;
 	});
 
