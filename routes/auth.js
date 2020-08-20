@@ -14,7 +14,7 @@ const COOKIE_NAME = 'cookie-jwt-access-token';
 function addUser(res, username, password, email) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		assert.equal(null, err);
-		const db = client.db(localDbName);
+		const db = client.db(dbName);
 		const collection = db.collection('users');
 
 		collection.findOne({ email }, (err, user) => {
@@ -48,7 +48,7 @@ function addUser(res, username, password, email) {
 function checkUserName(res, email, password) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		assert.equal(null, err);
-		const db = client.db(dbName2);
+		const db = client.db(dbName);
 		const collection = db.collection('users');
 		// what to do with email ?
 		collection.findOne({ email }, (err, user) => {
