@@ -8,7 +8,7 @@ const authRouter = require('./routes/auth');
 const { parseUser, anonymouse } = require('./middlewares/auth');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
 	console.log(`Node server is running on port ${PORT}...`);
@@ -16,10 +16,10 @@ app.listen(PORT, () => {
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.static(path.resolve(__dirname, 'client', 'public')));
 app.use(express.urlencoded()); // Parse URL-encoded bodies
 app.use(parseUser);
 app.use(authRouter);
-app.use(express.static(path.resolve(__dirname, 'client', 'public')));
 
 app.get('/', (req, res) => {
 	fs.createReadStream('./client/home.html').pipe(res);
