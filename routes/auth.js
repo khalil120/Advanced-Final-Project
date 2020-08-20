@@ -94,5 +94,10 @@ router.post('/register', (req, res) => {
 	const { username, password, email } = req.body;
 	addUser(res, username, password, email);
 });
+router.get('/logout', (req, res) => {
+	// remove the cookie to perform a logout
+	res.clearCookie(COOKIE_NAME);
+	res.redirect('/');
+});
 
 module.exports = router;
