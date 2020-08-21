@@ -21,8 +21,8 @@
         <!--BLUE BAR (HOME , SEARCH .. )-->
         <div style="position: absolute; width: 100%; background-color:rgb(0, 123, 255); ">
             <div class="btn-group" style=" float: right; width: 80%;" role="group" aria-label="Basic example">
-               <a type="button"  href="/login" style="width: 15%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: x-large;color: #fff" class="btn btn-primary" > התחברות <i class="fa fa-sign-in fa-1x" style="color: whitesmoke;"></i></a>
-                <a type="button" href="/register" style="width: 10%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: x-large;color: #fff" class="btn btn-primary" > להירשם <i class="fa fa-registered fa-1x" style="color: whitesmoke;"></i></a>
+               <a type="button"  href="/login" target="pageIframe" style="width: 15%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: x-large;color: #fff" class="btn btn-primary" > התחברות <i class="fa fa-sign-in fa-1x" style="color: whitesmoke;"></i></a>
+                <a type="button" href="/register" target="pageIframe" style="width: 10%;  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: x-large;color: #fff" class="btn btn-primary" > להירשם <i class="fa fa-registered fa-1x" style="color: whitesmoke;"></i></a>
                 <div class="btn-group" style="width: 10%;">
                     <button style=" font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size: x-large;" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             עוד <i class="fa fa-users fa-1x" style="color: whitesmoke;"></i>
@@ -64,7 +64,7 @@
 
     <!--IFRAME Container-->
     <div class="content " style="height:700px ; border-color: none; ">
-      <!--  <iframe src="/main.html " style="width: 100%; height: 100%; border: none; " id="mainframe "></iframe>-->
+        <iframe src="/main" style="width: 100%; height: 100%; border: none; " name="pageIframe" id="mainframe "></iframe>
     </div>
   
 

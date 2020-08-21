@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
+const { authorized, parseUser, anonymouse } = require('../middlewares/auth');
 
 const router = express.Router();
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017'; // mongodb Connection URL
@@ -40,7 +41,7 @@ function addUser(res, username, password, email) {
 
 			// set cookie for the client with the jwt
 			res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
-			return res.redirect('/');
+			return res.redirect('/main');
 		});
 	});
 }
@@ -66,7 +67,8 @@ function checkUserName(res, email, password) {
 					res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
 
 					client.close();
-					res.redirect('/');
+					console.log(email, password);
+					res.redirect('/main');
 				} else { // wrong password
 					client.close();
 					res.sendStatus(400);
@@ -96,6 +98,7 @@ router.post('/register', (req, res) => {
 });
 router.get('/logout', (req, res) => {
 	// remove the cookie to perform a logout
+
 	res.clearCookie(COOKIE_NAME);
 	res.redirect('/');
 });
