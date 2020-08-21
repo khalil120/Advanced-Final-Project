@@ -7,7 +7,6 @@ const { authorized, parseUser, anonymouse } = require('../middlewares/auth');
 const router = express.Router();
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017'; // mongodb Connection URL
 const dbName = 'heroku_342hvvg9'; // Database Name
-const localDbName = 'final-project';
 
 const JWT_SECRET = 'relax take it easy';
 const COOKIE_NAME = 'cookie-jwt-access-token';
