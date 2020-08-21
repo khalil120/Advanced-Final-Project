@@ -25,6 +25,9 @@ app.get('/', (req, res) => {
 	fs.createReadStream('./client/home.html').pipe(res);
 });
 
+app.get('/main', (req, res) => {
+	fs.createReadStream('./client/main.html').pipe(res);
+});
 app.get('/login', anonymouse, (req, res) => {
 	fs.createReadStream('./client/login.html').pipe(res);
 });
