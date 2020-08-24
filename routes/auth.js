@@ -40,7 +40,7 @@ function addUser(res, username, password, email) {
 
 			// set cookie for the client with the jwt
 			res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
-			return res.redirect('/main');
+			return res.redirect('/home');
 		});
 	});
 }
@@ -67,7 +67,7 @@ function checkUserName(res, email, password) {
 
 					client.close();
 					console.log(email, password);
-					res.redirect('/main');
+					res.redirect('/home');
 				} else { // wrong password
 					client.close();
 					res.sendStatus(400);
