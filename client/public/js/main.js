@@ -36,7 +36,7 @@
 			}
 			$.post(url, data, 'json').done((res) => {
 				alert(`welcome ${data.email}`);
-				location.href = '/main';
+				location.href = '/home';
 			}).fail((res) => {
 				if (url === '/login') {
 					alert('wrong password try again !');
