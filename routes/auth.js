@@ -99,7 +99,7 @@ router.get('/logout', (req, res) => {
 	// remove the cookie to perform a logout
 
 	res.clearCookie(COOKIE_NAME);
-	res.redirect('/');
+	res.redirect('/home');
 });
 
 module.exports = router;
