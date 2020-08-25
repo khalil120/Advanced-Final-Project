@@ -13,6 +13,7 @@
     <script src="/public/js/home.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/home.css">
     <title>Rents</title>
     <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
 
@@ -58,13 +59,25 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" target="_self" href="/login" >התחברות <i class="fa fa-sign-in fa-1x"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" target="_self" href="#" >קניית רכב <i class="fa fa-car fa-1x"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" target="_self" href="#">השכרת רכב <i class="fa fa-search fa-1x"></i></a>
-                        </li>
+                        </li>          
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                מכירה וקנייה  <i class="fa fa-car fa-1x"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" target="_self" href="#">למכור רכב</a>
+                                <a class="dropdown-item" target="_self" href="#">קניית רכב</a>                           
+                            </div>
+                        </li>    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                השכרה  <i class="fa fa-search fa-1x"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" target="_self" href="#">לשכור רכב</a>
+                                <a class="dropdown-item" target="_self" href="#">השכרת רכב</a>                           
+                            </div>
+                        </li>            
                         <li class="nav-item active">
                             <a class="nav-link" target="_self" href="/home" >דף הבית <span class="sr-only">(current)</span><i class="fa fa-home fa-1x"></i></a>
                         </li>
@@ -73,7 +86,8 @@
                                 חשבון שלי
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" target="_self" href="#">דף הזמנות</a>
+                                <a class="dropdown-item" target="_self" href="#">הזמנות שלי</a>
+                                <a class="dropdown-item" target="_self" href="#">דף בקשות</a>
                                 <a class="dropdown-item" target="_self" href="/logout">התנתק <i class="fa fa-sign-out fa-1x" ></i></a>                           
                             </div>
                         </li>
@@ -108,15 +122,67 @@
     <!--End Slider-->
 
 
-        
-
-
-    <!--IFRAME Container--
-    <div class="content " style="height:700px ; border-color: none; ">
-        <iframe src="/home" style="width: 100%; height: 100%; border: none; " name="pageIframe" id="mainframe "></iframe>
+    <!--Start Features-->
+    <div class="features text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <i class="fa fa-car fa-3x rounded-circle"></i>
+                    <h3>Easy</h3>
+                    <p>the easiest way to find a car to leasing or buy with Rents</p>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <i class="fa fa-credit-card fa-3x rounded-circle"></i>
+                    <h3>Cheap</h3>
+                    <p>because of the competitive market in Rents you will get the lowest price</p>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <i class="fa fa-handshake-o fa-3x rounded-circle"></i>
+                    <h3>Satisfy</h3>
+                    <p>with the big market of Rents be sure you will find what you are looking for</p>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <i class="fa fa-search fa-3x rounded-circle"></i>
+                    <h3>Search</h3>
+                    <p>with Rents search engine you can find your demands in seconds</p>
+                </div>
+            </div>
+        </div>
     </div>
-    -->
+    <!--End Features-->      
 
+
+    <!--Start Overview-->
+    <div class="choose-us ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 img">
+                    <img src="/public/images/car-logo.png" alt=""/>
+                </div>
+                <div class="col-md-6 text-center par">
+                    <h2>למה לבחור רינתס</h2>
+                    <p>אצלנו יכולים למצוא את הרכב שרוצים מתוך מבחר ענק של רכבים מכל האזורים גם במהירות וגם במחירים הכי זולים</p>
+                    <a target="_self" href="#" class="button text-rihgt" >ראה עוד</a>
+                </div>
+            </div>         
+        </div>
+    </div>
+    <!--End Overview-->
+
+    <!--Start Contact Us-->
+    <div class="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <a target="_self" href='#'>צור קשר</a>
+                </div>
+                <div class="col-sm-8 text-center">
+                    <p>צריך עזרה ? יש לך שאלה </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Contact Us-->
 
 
 
