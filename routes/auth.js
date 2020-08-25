@@ -2,23 +2,22 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
+const { authorized, parseUser, anonymouse } = require('../middlewares/auth');
 
 const router = express.Router();
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017'; // mongodb Connection URL
+const dbName = 'heroku_342hvvg9'; // Database Name
 
-// const dbName = ''; // Database Name
-const dbName2 = 'final-project';
-
-const JWT_SECRET = "black life's matter XD";
-const COOKIE_NAME = 'jwt-access-token';
+const JWT_SECRET = 'relax take it easy';
+const COOKIE_NAME = 'cookie-jwt-access-token';
 
 function addUser(res, username, password, email) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		assert.equal(null, err);
-		const db = client.db(dbName2);
+		const db = client.db(dbName);
 		const collection = db.collection('users');
 
-		collection.findOne({ username }, (err, user) => {
+		collection.findOne({ email }, (err, user) => {
 			if (err) {
 				console.log('error in finding doc:', err);
 				client.close();
@@ -41,18 +40,18 @@ function addUser(res, username, password, email) {
 
 			// set cookie for the client with the jwt
 			res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
-			return res.redirect('/');
+			return res.redirect('/home');
 		});
 	});
 }
 
-function checkUserName(res, username, password) {
+function checkUserName(res, email, password) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		assert.equal(null, err);
-		const db = client.db(dbName2);
+		const db = client.db(dbName);
 		const collection = db.collection('users');
 		// what to do with email ?
-		collection.findOne({ username }, (err, user) => {
+		collection.findOne({ email }, (err, user) => {
 			if (err) {
 				console.log('error in finding doc:', err);
 				client.close();
@@ -65,8 +64,10 @@ function checkUserName(res, username, password) {
 					const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 					// set cookie for the client with the jwt
 					res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
+
 					client.close();
-					res.redirect('/');
+					console.log(email, password);
+					res.redirect('/home');
 				} else { // wrong password
 					client.close();
 					res.sendStatus(400);
@@ -83,8 +84,8 @@ router.post('/login', (req, res) => {
 	if (!req.body) { // make sure request body exist
 		return res.sendStatus(400);
 	}
-	const { username, password } = req.body;
-	checkUserName(res, username, password);
+	const { email, password } = req.body;
+	checkUserName(res, email, password);
 });
 router.post('/register', (req, res) => {
 	// make sure request body exist
@@ -92,8 +93,13 @@ router.post('/register', (req, res) => {
 		return res.sendStatus(400);
 	}
 	const { username, password, email } = req.body;
-	console.log(username, password);
 	addUser(res, username, password, email);
+});
+router.get('/logout', (req, res) => {
+	// remove the cookie to perform a logout
+
+	res.clearCookie(COOKIE_NAME);
+	res.redirect('/');
 });
 
 module.exports = router;

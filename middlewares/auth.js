@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const COOKIE_NAME = 'jwt-access-token';
-const JWT_SECRET = 'black life matter XD';
+const JWT_SECRET = 'relax take it easy';
+const COOKIE_NAME = 'cookie-jwt-access-token';
 
 /**
  * use the authentcation cookie to parse a user object inside the request
@@ -36,7 +36,7 @@ function authorized(req, res, next) {
  */
 function anonymouse(req, res, next) {
 	if (req.user) {
-		return res.redirect('/');
+		return res.redirect('/home');
 	}
 	return next();
 }
