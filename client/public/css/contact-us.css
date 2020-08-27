@@ -91,7 +91,7 @@ textarea{
 	min-height: 150px;
 }
 
-.btn{
+.btn-c{
 	width: 100%;
 	padding: 0.5rem 1rem;
 	background-color: #08526d;
@@ -103,7 +103,7 @@ textarea{
 	transition: .3s;
 }
 
-.btn:hover{
+.btn-c:hover{
     background-color: #ec1c23;
     color: #fff;
 }
@@ -116,8 +116,13 @@ textarea{
 @media screen and (max-width: 880px){
 	.contact-box{
 		grid-template-columns: 1fr;
+		min-width: 320px;
 	}
 	.left{
 		height: 200px;
+	}
+	body{
+		height: 130vh;
+		width: 100%;
 	}
 }
