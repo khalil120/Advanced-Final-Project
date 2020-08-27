@@ -87,13 +87,13 @@
   }
   
   .slider .carousel-one{
-    background-image: url('/public/images/image-03.jpg');
+    background-image: url('/public/images/1.png');
   }
   .slider .carousel-two{
-    background-image: url('/public/images/image-02.jpg');
+    background-image: url('/public/images/2.png');
   }
   .slider .carousel-three{
-    background-image: url('/public/images/image-01.jpg');
+    background-image: url('/public/images/3.png');
   }
   
   .slider .carousel-indicators li{
@@ -116,7 +116,7 @@
 
 
   .features h3{
-    color: #08526d;
+   
     font-size: 22px;
   }
 
