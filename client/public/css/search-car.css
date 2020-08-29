@@ -81,6 +81,7 @@
     border-radius: 20px;
     animation-name: start;
     animation-duration: 2s;
+ 
 }
 
 .car-list-label2{
@@ -96,8 +97,11 @@
     height: 30px;
     border-radius: 5px;
     margin-bottom: 20px;
+    transition: Width 1s;
 }
-
+.car-list:hover{
+    width: 250px;
+} 
 input {
     border: 0.1px solid rgb(155, 155, 155);
     border-radius: 5px;
