@@ -11,6 +11,7 @@
     position:relative;
     border: 0.1px solid rgb(114, 167, 164);
     border-radius: 20px;
+    box-shadow: 5px 5px 2px grey;
 }
 .cars_image{
     float: right;
@@ -95,5 +96,6 @@ input {
       width: 450px;
       height: 450px;
       text-align: center;
+      box-shadow: 5px 5px 2px grey;
   }
   
