@@ -99,38 +99,43 @@
     </nav>
     <!--End Navbar-->
 
-<div class="info-container">
-    <p class="car-list-label" >בחר סוג חיפוש</p>
-    <select class="car-list" name="cars" id="cars">
+
+<div class="info-container" id="infoC" style="height: 100px;">
+    <p class="car-list-label2" >בחר סוג חיפוש</p>
+    <select class="car-list" onchange="getSelect()" id="cars">
          <option selected disabled>בחר סוג חיפוש</option>
          <option value="buy">קניית רכב</option>
          <option value="Lease">השכרת רכב</option>
      </select>
-     <br><br>
-     <div class="row">
-        <div class="col-md">
-            <p class="car-list-label2" > - מחיר עד</p>
-             <input type="text"  name="currency-field" id="fromPrice" value="" data-type="currency" placeholder="₪">
-        </div>
-        <div class="col-md">
-            <p class="car-list-label2" > - מחיר החל מ</p>
-             <input type="text" name="currency-field" id="fromPrice"  value="" data-type="currency" placeholder="₪">  
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md">
-            <p class="car-list-label2" > - תאריך עד</p>
-             <input type="date" name="currency-field" id="fromPrice" value="" data-type="currency" placeholder="₪">
-        </div>
-        <div class="col-md">
-            <p class="car-list-label2" > - תאריך החל מ</p>
-             <input type="date" name="currency-field" id="fromPrice"  value="" data-type="currency" placeholder="₪">  
-        </div>
-    </div>   
+
+            <div class="inner-div" id="inner">
+                <div class="row">
+                    <div class="col-md">
+                        <p class="car-list-label2" > - מחיר החל מ</p>
+                        <input type="text"  name="currency-field" id="fromPrice" value="" data-type="currency" placeholder="₪">
+            
+                        <p class="car-list-label2" > - מחיר עד</p>
+                        <input type="text" name="currency-field" id="toPrice"  value="" data-type="currency" placeholder="₪">      
+                
+                    </div>
+                    <div class="col-md">
+                        <p class="car-list-label2" > - תאריך החל מ</p>
+                        <input type="date" name="currency-field" id="fromDate" value=""  >
+            
+                        <p class="car-list-label2" > - תאריך עד</p>
+                        <input type="date" name="currency-field" id="toDate"  value="" >
+        
+                    </div>
+                    <div class="col-md">
+                        <button onclick="show()" class="inner-div-button" >Show</button>
+                    </div>
+                </div>
+            </div>
+
  </div>
 
     
-    <div class="container-fluid" style="padding-left: 40px;">
+    <div class="my-container">
 
         <!-- Div for append (SALE CARS) -->
     <div id="sale_cars_div">       
@@ -144,6 +149,25 @@
     </div>
 <!-- -->
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

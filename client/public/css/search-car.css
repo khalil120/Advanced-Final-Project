@@ -1,7 +1,17 @@
+
+/*START  car lease profile  */
+.my-container{
+    margin-left: 50px;
+}
+@media(max-width:500px){
+    .my-container{
+        margin-left: 20px;
+    }
+}
 .cars_container{
     padding-top: 10px;
     height: 190px;
-    width: 450px;
+    width: 440px;
     display: inline-block;
     margin-right: 45px;
     margin-bottom: 20px;
@@ -11,7 +21,7 @@
     position:relative;
     border: 0.1px solid rgb(114, 167, 164);
     border-radius: 20px;
-    box-shadow: 5px 5px 2px grey;
+    box-shadow: 2px 2px 5px grey;
 }
 .cars_image{
     float: right;
@@ -36,7 +46,7 @@
     font-size: 16px;
     color:black;
 }
-.cars_order{
+.cars_order{/*red button*/
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: red;
     color: white;
@@ -53,14 +63,28 @@
     color: forestgreen;
     padding: 0px;
 }
-.car-list-label{
-    font-size: large;
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: white;
+
+/*END  car lease profile  */
+
+
+
+.info-container{
+    padding-top: 10px;
+    background-color: #08526d;
+    margin-left: 35%;
+    width: 500px;
+    margin-bottom: 8%;
+    margin-top: 2%;
+    text-align: center;
+    position: relative;
+    box-shadow: 5px 5px 10px grey;
+    border-radius: 20px;
+    animation-name: start;
+    animation-duration: 2s;
 }
+
 .car-list-label2{
-    font-size: medium;
+    font-size: small;
     font-weight: bold;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
@@ -71,13 +95,7 @@
     width: 300px;
     height: 30px;
     border-radius: 5px;
-}
-.price-input-label{
-    font-size: medium;
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    float: right;
-    color: black;
+    margin-bottom: 20px;
 }
 
 input {
@@ -85,17 +103,50 @@ input {
     border-radius: 5px;
     color: #333;
     font-size: 10px;
-    margin: 0 0 20px;
     padding: .5rem 1rem;
     width: 160px;
   }
-  .info-container{
-      padding-top: 10px;
-      background-color: #08526d;
-      float: right;
-      width: 450px;
-      height: 450px;
-      text-align: center;
-      box-shadow: 5px 5px 2px grey;
-  }
-  
+.inner-div{
+  display: none;
+}
+.inner-div-button{/*red button*/
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: red;
+    color: white;
+    height: 30px;
+    margin-top: 90px;
+    width: 140px;
+    border-radius: 10px 10px 10px 10px;
+}
+  @media(max-width: 500px){
+    .info-container{       
+        width: 100%;     
+        margin-bottom: 320px;
+        margin-left: 0%;   
+        border-radius: 4px;
+
+    }
+}
+  @media(max-width: 500px){
+    input{       
+        width: 240px;   
+    }
+}
+@media(max-width: 500px){
+    .cars_container {       
+        padding-right:40px ;
+        position: relative;;
+    }
+}
+
+@media(max-width: 500px){
+    .inner-div-button{
+        margin-top: 20px;
+    }
+}
+
+@keyframes start {
+    0%   {background-color: #053141; left:0px;}
+    50%  {background-color: rgb(8, 72, 102); height: 200px;}
+    100% {background-color: #0a5b79; left:0px;}
+}
