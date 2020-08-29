@@ -14,16 +14,33 @@
     <link rel="stylesheet" type="text/css" href="/public/css/search-car.css">
     <title>Rents</title>
     <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>
+    <script src="/public/js/search-car.js"></script>
+
 </head>
 
+
 <body>
+    <!--Start Upper Bar-->
+    <div class="upper-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <i class="fa fa-envelope-o"></i> Rents@support.com
+                </div>
+                <div class="col-md">
+                    Lets Work Together <span class="Get-Quote"> Get Quote </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Upper Bar-->
 
     <!--Start Navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand"><span>R</span><span>ents</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
                     </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
@@ -82,12 +99,58 @@
     </nav>
     <!--End Navbar-->
 
-    <h1>this Page would be to search cars for buy or leasing</h1>
+<div class="info-container">
+    <p class="car-list-label" >בחר סוג חיפוש</p>
+    <select class="car-list" name="cars" id="cars">
+         <option selected disabled>בחר סוג חיפוש</option>
+         <option value="buy">קניית רכב</option>
+         <option value="Lease">השכרת רכב</option>
+     </select>
+     <br><br>
+     <div class="row">
+        <div class="col-md">
+            <p class="car-list-label2" > - מחיר עד</p>
+             <input type="text"  name="currency-field" id="fromPrice" value="" data-type="currency" placeholder="₪">
+        </div>
+        <div class="col-md">
+            <p class="car-list-label2" > - מחיר החל מ</p>
+             <input type="text" name="currency-field" id="fromPrice"  value="" data-type="currency" placeholder="₪">  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <p class="car-list-label2" > - תאריך עד</p>
+             <input type="date" name="currency-field" id="fromPrice" value="" data-type="currency" placeholder="₪">
+        </div>
+        <div class="col-md">
+            <p class="car-list-label2" > - תאריך החל מ</p>
+             <input type="date" name="currency-field" id="fromPrice"  value="" data-type="currency" placeholder="₪">  
+        </div>
+    </div>   
+ </div>
+
+    
+    <div class="container-fluid" style="padding-left: 40px;">
+
+        <!-- Div for append (SALE CARS) -->
+    <div id="sale_cars_div">       
+
+    </div>
+<!-- -->
+<!-- only one of this two divs will be appended.-->
+<!-- Div for append (LEASE CARS) -->
+    <div id="lease_cars_div">       
+
+    </div>
+<!-- -->
+    </div>
+
 
 
 
     <!--END OF EVERY PAGE-->
-    <div style="background: #08526d; width: 100%; height: 600px; ">
+    <div style="background: #08526d;; width: 100%; height: 600px; ">
+
         <div class="container ">
             <br><br><br>
             <h3 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large; font-weight: bold; color: white; float: right; ">
