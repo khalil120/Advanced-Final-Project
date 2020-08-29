@@ -133,9 +133,17 @@ input {
     }
 }
 @media(max-width: 500px){
-    .cars_container {       
+    .cars_container {    
+        height: 210px;
+        width: 360px;
         padding-right:40px ;
+        margin-bottom: 6%;
         position: relative;;
+    }
+}
+@media(max-width: 500px){
+    .cars_order{
+        width: 120px;
     }
 }
 
