@@ -35,7 +35,7 @@ function addUser(res, username, password, email) {
 			collection.insertOne(newUser);
 
 			// create a jwt token for the user
-			const payload = { username: newUser.username, joined: newUser.joined };
+			const payload = { username: newUser.email, joined: newUser.joined };
 			const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 
 			// set cookie for the client with the jwt
@@ -60,13 +60,12 @@ function checkUserName(res, email, password) {
 			if (user) {
 				if (user.password === password) {
 					// create a jwt token for the user
-					const payload = { username: user.username, joined: user.joined };
+					const payload = { username: user.email, joined: user.joined };
 					const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 					// set cookie for the client with the jwt
 					res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
 
 					client.close();
-					console.log(email, password);
 					res.redirect('/home');
 				} else { // wrong password
 					client.close();
@@ -95,7 +94,7 @@ router.post('/register', (req, res) => {
 	const { username, password, email } = req.body;
 	addUser(res, username, password, email);
 });
-router.get('/logout', (req, res) => {
+router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout
 
 	res.clearCookie(COOKIE_NAME);

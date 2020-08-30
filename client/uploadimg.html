@@ -23,8 +23,18 @@
             let formData = new FormData();
             let file =$('#fileupload').prop('files')[0];
             let name=$('#nameid').val()
+            let type='sale'
             formData.append('name',name)
             formData.append('img', file)
+            formData.append('gearBox', 'auto')
+            formData.append('color', 'black')
+            formData.append('year', '2020')
+            formData.append('price', '10000')
+            formData.append('model', 'toyota')
+            formData.append('mileage', '2313')
+            formData.append('username', 'saher')
+            formData.append('typeUpload', type)
+            formData.append('engineType', 'dezil')
             console.log(formData)
             console.log(formData.get('name'))
            /* $.post('/upload', formData,{dataType:'json',processData: false}).done((res) => {
@@ -34,7 +44,7 @@
             });*/
             $.ajax({
                 type: "POST",
-                url: '/upload',
+                url: '/upload-car-for-sale',
                 data: formData,
                 processData: false,
                 contentType: false
