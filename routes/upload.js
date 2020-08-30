@@ -4,8 +4,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const path = require('path');
 const mongodb = require('mongodb');
-
-const { MongoClient } = mongodb;
+const { MongoClient } = require('mongodb');
 const assert = require('assert');
 const fs = require('fs');
 
