@@ -22,10 +22,6 @@ MongoClient.connect(`${url}/heroku_342hvvg9`, { useUnifiedTopology: true }, (err
 	assert.equal(null, err);
 	const db = client.db(dbName);
 
-	const bucket = new mongodb.GridFSBucket(db, {
-		bucketName: 'img',
-	});
-
 	const storage = new GridFsStorage({
 		url: process.env.MONGODB_URI || `mongodb://localhost:27017/${dbName}`, // mongodb Connection URL
 		file: (req, file) => new Promise((resolve, reject) => {
@@ -34,10 +30,16 @@ MongoClient.connect(`${url}/heroku_342hvvg9`, { useUnifiedTopology: true }, (err
 					return reject(err);
 				}
 				const filename = buf.toString('hex') + path.extname(file.originalname);
-				console.log('hello', url, filename);
+				// check type of upload if rent or sale
+				const { typeUpload } = req.body;
+				let bucket = 'imgRent';
+
+				if (typeUpload === 'sale') {
+					bucket = 'imgSale';
+				}
 				const fileInfo = {
 					filename,
-					bucketName: 'img',
+					bucketName: bucket,
 				};
 				resolve(fileInfo);
 			});
@@ -45,13 +47,56 @@ MongoClient.connect(`${url}/heroku_342hvvg9`, { useUnifiedTopology: true }, (err
 	});
 	const upload = multer({ storage });
 
-	routerUpload.post('/upload', upload.single('img'), (req, res) => {
+	routerUpload.post('/upload-car-for-sale', upload.single('img'), (req, res) => {
 		console.log(req.file);
+		const collection = db.collection('carSale');
 
+		const {
+			username, mileage, engineType, gearBox, color, year, price, model,
+		} = req.body;
+		const data = {
+			username,
+			mileage,
+			engineType,
+			gearBox,
+			color,
+			year,
+			price,
+			model,
+			filename: req.file.filename,
+			bucketName: req.file.bucketName,
+		};
+		collection.insertOne(data);
+		console.log(data);
+		res.redirect('/home');
+	});
+	routerUpload.post('/upload-car-for-rent', upload.single('img'), (req, res) => {
+		console.log(req.file);
+		const collection = db.collection('carRent');
+		const {
+			username, engineType, gearBox, color, year, price, model, time,
+		} = req.body;
+		const data = {
+			username,
+			engineType,
+			gearBox,
+			color,
+			year,
+			price,
+			model,
+			time,
+			filename: req.file.filename,
+			bucketName: req.file.bucketName,
+		};
+		collection.insertOne(data);
+		console.log(data);
 		res.redirect('/home');
 	});
 	routerUpload.get('/image', (req, res) => {
 		// add file name in get request
+		const bucket = new mongodb.GridFSBucket(db, {
+			bucketName: 'img',
+		});
 		bucket.openDownloadStreamByName('image name after uploaded here-----------').pipe(
 			fs.createWriteStream('./client/public/img/ image name here ------------------'),
 		).on('error',
