@@ -38,6 +38,13 @@ app.get('/register', anonymouse, (req, res) => {
 app.get('/upload', (req, res) => {
 	fs.createReadStream('./client/uploadimg.html').pipe(res);
 });
+app.get('/contact-us', anonymouse, (req, res) => {
+	fs.createReadStream('./client/contact-us.html').pipe(res);
+});
+app.get('/post-car', anonymouse, (req, res) => {
+	fs.createReadStream('./client/post.html').pipe(res);
+});
+
 app.listen(PORT, () => {
 	console.log(`Node server is running on port ${PORT}...`);
 });

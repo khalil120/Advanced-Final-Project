@@ -476,6 +476,12 @@ iframe {
   margin: 5px;
 }
 
+@media(max-width: 330px){
+  .Get-Quote{
+    display: none;
+  }
+}
+
 /*End Upper Bar*/
 
 /*Start Navbar*/
