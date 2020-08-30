@@ -41,8 +41,18 @@ function show() {
     + '            </div>'));
 }
 function getSelect() {
-	document.getElementById('infoC').style.height = '400px';
-	document.getElementById('infoC').style.background = '#0a5b79';
+	const container = document.getElementById('infoC');
+	container.style.height = '400px';
+	container.style.background = '#0a5b79';
+	const selected = document.getElementById('cars');
 
-	document.getElementById('inner').style.display = 'contents';
+	if (selected.options[selected.selectedIndex].value == 'Buy') {
+		document.getElementById('inner-lease').style.display = 'contents';
+		document.getElementById('csearch').style.display = 'inline';
+		document.getElementById('csearch-label').style.display = 'inherit';
+	} else if (selected.options[selected.selectedIndex].value == 'Lease') {
+		document.getElementById('inner-lease').style.display = 'contents';
+		document.getElementById('csearch').style.display = 'none';
+		document.getElementById('csearch-label').style.display = 'none';
+	}
 }

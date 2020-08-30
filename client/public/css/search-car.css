@@ -77,10 +77,11 @@
     margin-top: 2%;
     text-align: center;
     position: relative;
-    box-shadow: 5px 5px 10px grey;
+    box-shadow: 8px 8px 10px grey;
     border-radius: 20px;
     animation-name: start;
     animation-duration: 2s;
+ 
 }
 
 .car-list-label2{
@@ -95,9 +96,12 @@
     width: 300px;
     height: 30px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    transition: Width 1s;
 }
-
+.car-list:hover{
+    width: 280px;
+} 
 input {
     border: 0.1px solid rgb(155, 155, 155);
     border-radius: 5px;
@@ -106,7 +110,7 @@ input {
     padding: .5rem 1rem;
     width: 160px;
   }
-.inner-div{
+.inner-div-lease{
   display: none;
 }
 .inner-div-button{/*red button*/
@@ -133,15 +137,28 @@ input {
     }
 }
 @media(max-width: 500px){
-    .cars_container {       
+    .cars_container {    
+        height: 210px;
+        width: 360px;
         padding-right:40px ;
+        margin-bottom: 6%;
         position: relative;;
+    }
+}
+@media(max-width: 500px){
+    .cars_order{
+        width: 120px;
     }
 }
 
 @media(max-width: 500px){
     .inner-div-button{
-        margin-top: 20px;
+        margin-top: 10px;
+    }
+}
+@media(max-width: 500px){
+    .car-list{
+        margin-bottom: 0px;
     }
 }
 
