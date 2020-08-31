@@ -24,7 +24,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		bucketName: 'img',
 	});
 	const storage = new GridFsStorage({
-		url: dataurl, // mongodb Connection URL
+		url, // mongodb Connection URL
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
