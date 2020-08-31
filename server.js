@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, 'client', 'public')));
 app.use(express.static(path.join(__dirname, 'client')));
-app.use(express.urlencoded()); // Parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(parseUser);
 app.use(authRouter);
 app.use(routerupload);

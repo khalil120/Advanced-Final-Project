@@ -11,18 +11,20 @@ const fs = require('fs');
 const routerUpload = express.Router();
 const dbName = 'heroku_342hvvg9'; // Database Name
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017'; // mongodb Connection URL
-
+const dataurl = `${url}/heroku_342hvvg9`;
 // create or use an existing mongodb-native db instance.
 // for this example we'll just create one:
 
 // make sure the db instance is open before passing into `Grid`
 
-MongoClient.connect(`${url}/heroku_342hvvg9`, { useUnifiedTopology: true }, (err, client) => {
+MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	assert.equal(null, err);
 	const db = client.db(dbName);
-
+	const bucket = new mongodb.GridFSBucket(db, {
+		bucketName: 'img',
+	});
 	const storage = new GridFsStorage({
-		url: process.env.MONGODB_URI || `mongodb://localhost:27017/${dbName}`, // mongodb Connection URL
+		url: dataurl, // mongodb Connection URL
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -93,9 +95,6 @@ MongoClient.connect(`${url}/heroku_342hvvg9`, { useUnifiedTopology: true }, (err
 	});
 	routerUpload.get('/image', (req, res) => {
 		// add file name in get request
-		const bucket = new mongodb.GridFSBucket(db, {
-			bucketName: 'img',
-		});
 		bucket.openDownloadStreamByName('image name after uploaded here-----------').pipe(
 			fs.createWriteStream('./client/public/img/ image name here ------------------'),
 		).on('error',
