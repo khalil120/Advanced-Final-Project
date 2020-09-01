@@ -21,8 +21,9 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	assert.equal(null, err);
 	const db = client.db(dbName);
 	const bucket = new mongodb.GridFSBucket(db, {
-		bucketName: 'img',
+		bucketName: 'imgRent',
 	});
+
 	const storage = new GridFsStorage({
 		url, // mongodb Connection URL
 		file: (req, file) => new Promise((resolve, reject) => {
@@ -32,15 +33,9 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				}
 				const filename = buf.toString('hex') + path.extname(file.originalname);
 				// check type of upload if rent or sale
-				const { typeUpload } = req.body;
-				let bucket = 'imgRent';
-
-				if (typeUpload === 'sale') {
-					bucket = 'imgSale';
-				}
 				const fileInfo = {
 					filename,
-					bucketName: bucket,
+					bucketName: 'imgRent',
 				};
 				resolve(fileInfo);
 			});
@@ -53,7 +48,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		const collection = db.collection('carSale');
 
 		const {
-			username, mileage, engineType, gearBox, color, year, price, model,
+			username, mileage, engineType, gearBox, color, year, price, model, bags, seats,
 		} = req.body;
 		const data = {
 			username,
@@ -64,12 +59,14 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 			year,
 			price,
 			model,
+			bags,
+			seats,
 			filename: req.file.filename,
 			bucketName: req.file.bucketName,
 		};
 		collection.insertOne(data);
 		console.log(data);
-		res.redirect('/home');
+		res.redirect('/');
 	});
 	routerUpload.post('/upload-car-for-rent', upload.single('img'), (req, res) => {
 		console.log(req.file);
@@ -91,19 +88,59 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		};
 		collection.insertOne(data);
 		console.log(data);
-		res.redirect('/home');
+		res.redirect('/');
 	});
-	routerUpload.get('/image', (req, res) => {
+	routerUpload.post('/show-buy', (req, res) => {
 		// add file name in get request
-		bucket.openDownloadStreamByName('image name after uploaded here-----------').pipe(
-			fs.createWriteStream('./client/public/img/ image name here ------------------'),
-		).on('error',
-			(error) => {
-				console.log('Error:-', error);
-			}).on('finish', () => {
-			console.log('done!');
-		});
-		res.status(200).redirect('/home');
+		const { carType } = req.body;
+		const collection = db.collection('carSale');
+		if (carType.length > 0) {
+			collection.find({ model: carType }).toArray((err, docs) => {
+				assert.equal(err, null);
+
+				const array = [];
+				const imageNmae = [];
+				docs.forEach((element) => {
+					array.push(element);
+					imageNmae.push(element.filename);
+				});
+				imageNmae.forEach((fileName) => {
+					bucket.openDownloadStreamByName(fileName).pipe(
+						fs.createWriteStream(`./client/public/img/${fileName}`),
+					).on('error',
+						(error) => {
+							console.log('Error:-', error);
+							res.sendStatus(404);
+						}).on('finish', () => {
+						console.log(`${fileName} download complete!`);
+					});
+				});
+				res.status(200).send(array);
+			});
+		} else {
+			collection.find({}).toArray((err, docs) => {
+				assert.equal(err, null);
+
+				const array = [];
+				const imageNmae = [];
+				docs.forEach((element) => {
+					array.push(element);
+					imageNmae.push(element.filename);
+				});
+				imageNmae.forEach((fileName) => {
+					bucket.openDownloadStreamByName(fileName).pipe(
+						fs.createWriteStream(`./client/public/img/${fileName}`),
+					).on('error',
+						(error) => {
+							console.log('Error:-', error);
+							res.sendStatus(404);
+						}).on('finish', () => {
+						console.log(`${fileName} download complete!`);
+					});
+				});
+				res.status(200).send(array);
+			});
+		}
 	});
 });
 module.exports = routerUpload;
