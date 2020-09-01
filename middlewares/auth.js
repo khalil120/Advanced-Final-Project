@@ -36,7 +36,7 @@ function authorized(req, res, next) {
  */
 function anonymouse(req, res, next) {
 	if (req.user) {
-		return res.redirect('/home');
+		return res.redirect('/');
 	}
 	return next();
 }

@@ -40,7 +40,7 @@ function addUser(res, username, password, email) {
 
 			// set cookie for the client with the jwt
 			res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
-			return res.redirect('/home');
+			return res.redirect('/');
 		});
 	});
 }
@@ -66,7 +66,7 @@ function checkUserName(res, email, password) {
 					res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
 
 					client.close();
-					res.redirect('/home');
+					res.redirect('/');
 				} else { // wrong password
 					client.close();
 					res.sendStatus(400);
@@ -98,7 +98,7 @@ router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout
 
 	res.clearCookie(COOKIE_NAME);
-	res.redirect('/home');
+	res.redirect('/');
 });
 
 module.exports = router;

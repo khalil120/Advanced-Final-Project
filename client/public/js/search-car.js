@@ -1,3 +1,30 @@
+$(document).ready(() => {
+	$(document).on('click', '.inner-div-button', () => {
+		const carType = $('#csearch').val();
+		const searchType = $('.car-list option:selected').val();
+		let url;
+		if (searchType === 'Buy') url = '/show-buy';
+		else url = '/show-rent';
+		$('#lease_cars_div').html('');
+		$('#sale_cars_div').html('');
+		$.post(url, { carType }, 'json').done((res, status) => {
+			if (url === '/show-buy') divName = '#sale_cars_div';
+			else divName = '#lease_cars_div';
+			$.each(res, (index, item) => {
+				$(divName).append(`<div class="cars_container" id="${item.filename}">
+               <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
+                <p class="cars_price" >${item.price}</p>
+               <p class="cars_name" >${item.model}</p>
+                <p class="cars_desc" >${item.seats} Adults, ${item.bags} bags</p>
+               <p class="available" >Available!</p>
+                <button class="cars_order" >Show deal</button>
+                </div>`);
+			});
+		}).fail((res) => {
+			alert('error!');
+		});
+	});
+});
 function show() {
 	$('#lease_cars_div').append($('<div class="cars_container">\n'
     + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'

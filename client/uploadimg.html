@@ -8,7 +8,7 @@
 </head>
 <body>
     <div >
-    <form id="myForm">
+    <form id="myForm" >
         <input type="text" class="form-control" placeholder="name" id="nameid" name="nameid">
         <input type="file" class="form-control" placeholder="imgupload" id="fileupload" name="img" accept="image/*">
         <button type="button" class="form-control" id="btn-sub"> sub</button>
@@ -32,6 +32,8 @@
             formData.append('price', '10000')
             formData.append('model', 'toyota')
             formData.append('mileage', '2313')
+            formData.append('bags', '4')
+            formData.append('seats', '5')
             formData.append('username', 'saher')
             formData.append('typeUpload', type)
             formData.append('engineType', 'dezil')
@@ -49,7 +51,8 @@
                 processData: false,
                 contentType: false
             }).done((res) => {
-				location.href = '/home';
+                
+				location.href = '/';
 			}).fail((res) => {
 				alert(' try again !');
             });
