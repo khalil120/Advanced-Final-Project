@@ -25,7 +25,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url, // mongodb Connection URL
+		url: dataurl, // mongodb Connection URL
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -105,6 +105,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					imageNmae.push(element.filename);
 				});
 				imageNmae.forEach((fileName) => {
+					/*
 					bucket.openDownloadStreamByName(fileName).pipe(
 						fs.createWriteStream(`./client/public/img/${fileName}`),
 					).on('error',
@@ -113,8 +114,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
-					});
+					}); */
+					console.log('hellooo');
+					res.pipe(bucket.openDownloadStreamByName(fileName));
 				});
+
 				res.status(200).send(array);
 			});
 		} else {
@@ -127,6 +131,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					array.push(element);
 					imageNmae.push(element.filename);
 				});
+
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
 						fs.createWriteStream(`./client/public/img/${fileName}`),
@@ -135,7 +140,12 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 							console.log('Error:-', error);
 							res.sendStatus(404);
 						}).on('finish', () => {
-						console.log(`${fileName} download complete!`);
+						res.download(`./client/public/img/${fileName}`);
+					/*	res.writeHead(200, {
+							'Content-Type': 'application/octet-stream',
+							'Content-Disposition': `attachment; filename=${fileName}`,
+						});
+						fs.createReadStream(`./client/public/img/${fileName}`).pipe(res); */
 					});
 				});
 				res.status(200).send(array);

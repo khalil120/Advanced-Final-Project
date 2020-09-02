@@ -10,6 +10,8 @@ $(document).ready(() => {
 		$.post(url, { carType }, 'json').done((res, status) => {
 			if (url === '/show-buy') divName = '#sale_cars_div';
 			else divName = '#lease_cars_div';
+			console.log(res);
+			console.log(res.file);
 			$.each(res, (index, item) => {
 				$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
