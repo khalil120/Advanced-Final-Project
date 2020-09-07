@@ -37,7 +37,7 @@ $(document).ready(() => {
 function show() {
 	if (flag == 0) {
 		flag = 1;
-		/*	$('#lease_cars_div').append($('<div class="cars_container">\n'
+		$('#lease_cars_div').append($('<div class="cars_container">\n'
     + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
     + '                <p class="cars_price" >189₪ per day </p>\n'
     + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
@@ -58,15 +58,15 @@ function show() {
     + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
     + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
     + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
-    + '            </div>')); */
-	/*	$('#Price-div').append('189₪');
+    + '            </div>'));
+		$('#Price-div').append('189₪');
 		$('#Model-div').append('Hyundai IONIQ Electric');
 		$('#Year-div').append('2019');
 		$('#Gearbox-div').append('Automatic');
 		$('#Color-div').append('White');
 		$('#Seats-div').append('5 Adults');
 		$('#Bags-div').append('3 Bags');
-		$('#Available-div').append('Yes'); */
+		$('#Available-div').append('Yes');
 	}
 }
 function showDeal() {
