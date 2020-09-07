@@ -4,6 +4,8 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const path = require('path');
 const mongodb = require('mongodb');
+
+const { ObjectID } = mongodb;
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
 const fs = require('fs');
@@ -43,56 +45,66 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 	const upload = multer({ storage });
 
-	routerUpload.post('/upload-car-for-sale', upload.single('img'), (req, res) => {
-		console.log(req.file);
+	routerUpload.post('/upload-sale', upload.single('img'), (req, res) => {
 		const collection = db.collection('carSale');
 
 		const {
-			username, mileage, engineType, gearBox, color, year, price, model, bags, seats,
+			milege, engineType, gearBox, carColor, roadEntry, price, carModel, airBags, seats,
 		} = req.body;
+		const { username } = req.user;
 		const data = {
 			username,
-			mileage,
+			milege,
 			engineType,
 			gearBox,
-			color,
-			year,
+			carColor,
+			roadEntry,
 			price,
-			model,
-			bags,
+			carModel,
+			airBags,
 			seats,
 			filename: req.file.filename,
-			bucketName: req.file.bucketName,
+
 		};
 		collection.insertOne(data);
-		console.log(data);
-		res.redirect('/');
+		res.sendStatus(200);
 	});
-	routerUpload.post('/upload-car-for-rent', upload.single('img'), (req, res) => {
-		console.log(req.file);
+	routerUpload.post('/upload-rent', upload.single('img'), (req, res) => {
 		const collection = db.collection('carRent');
 		const {
-			username, engineType, gearBox, color, year, price, model, time,
-		} = req.body;
-		const data = {
-			username,
 			engineType,
 			gearBox,
-			color,
-			year,
-			price,
-			model,
-			time,
+			carColor,
+			roadEntry,
+			priceDay,
+			toDate,
+			fromDate,
+			carModel,
+			airBags,
+			seats,
+		} = req.body;
+		const { username } = req.user;
+		const data = {
+			username,
+			priceDay,
+			engineType,
+			gearBox,
+			carColor,
+			roadEntry,
+			toDate,
+			fromDate,
+			carModel,
+			airBags,
+			seats,
 			filename: req.file.filename,
-			bucketName: req.file.bucketName,
 		};
 		collection.insertOne(data);
-		console.log(data);
-		res.redirect('/');
+		res.sendStatus(200);
 	});
 	routerUpload.post('/show-buy', (req, res) => {
 		// add file name in get request
 		const { carType } = req.body;
+
 		const collection = db.collection('carSale');
 		if (carType.length > 0) {
 			collection.find({ model: carType }).toArray((err, docs) => {
@@ -105,7 +117,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					imageNmae.push(element.filename);
 				});
 				imageNmae.forEach((fileName) => {
-					/*
 					bucket.openDownloadStreamByName(fileName).pipe(
 						fs.createWriteStream(`./client/public/img/${fileName}`),
 					).on('error',
@@ -114,9 +125,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
-					}); */
-					console.log('hellooo');
-					res.pipe(bucket.openDownloadStreamByName(fileName));
+					});
 				});
 
 				res.status(200).send(array);
@@ -131,7 +140,36 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					array.push(element);
 					imageNmae.push(element.filename);
 				});
+				imageNmae.forEach((fileName) => {
+					bucket.openDownloadStreamByName(fileName).pipe(
+						fs.createWriteStream(`./client/public/img/${fileName}`),
+					).on('error',
+						(error) => {
+							console.log('Error:-', error);
+						}).on('finish', () => {
+						console.log(`${fileName} download complete!`);
+					});
+					res.send(array);
+				});
+			});
+		}
+	});
+	routerUpload.post('/show-rent', (req, res) => {
+		// add file name in get request
+		// add search via date and price
+		const { toDate, fromDate } = req.body;
 
+		const collection = db.collection('carRale');
+		if (carType.length > 0) {
+			collection.find({ }).toArray((err, docs) => {
+				assert.equal(err, null);
+
+				const array = [];
+				const imageNmae = [];
+				docs.forEach((element) => {
+					array.push(element);
+					imageNmae.push(element.filename);
+				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
 						fs.createWriteStream(`./client/public/img/${fileName}`),
@@ -140,15 +178,33 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 							console.log('Error:-', error);
 							res.sendStatus(404);
 						}).on('finish', () => {
-						res.download(`./client/public/img/${fileName}`);
-					/*	res.writeHead(200, {
-							'Content-Type': 'application/octet-stream',
-							'Content-Disposition': `attachment; filename=${fileName}`,
-						});
-						fs.createReadStream(`./client/public/img/${fileName}`).pipe(res); */
+						console.log(`${fileName} download complete!`);
 					});
 				});
+
 				res.status(200).send(array);
+			});
+		} else {
+			collection.find({}).toArray((err, docs) => {
+				assert.equal(err, null);
+
+				const array = [];
+				const imageNmae = [];
+				docs.forEach((element) => {
+					array.push(element);
+					imageNmae.push(element.filename);
+				});
+				imageNmae.forEach((fileName) => {
+					bucket.openDownloadStreamByName(fileName).pipe(
+						fs.createWriteStream(`./client/public/img/${fileName}`),
+					).on('error',
+						(error) => {
+							console.log('Error:-', error);
+						}).on('finish', () => {
+						console.log(`${fileName} download complete!`);
+					});
+					res.send(array);
+				});
 			});
 		}
 	});

@@ -11,7 +11,7 @@ $(document).ready(() => {
 			if (url === '/show-buy') divName = '#sale_cars_div';
 			else divName = '#lease_cars_div';
 			console.log(res);
-			console.log(res.file);
+
 			$.each(res, (index, item) => {
 				$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
@@ -27,48 +27,7 @@ $(document).ready(() => {
 		});
 	});
 });
-function show() {
-	$('#lease_cars_div').append($('<div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" >Available!</p>\n'
-    + '                <button class="cars_order" >Show deal</button>\n'
-    + '            </div>'
-    + '                <div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" >Available!</p>\n'
-    + '                <button class="cars_order" >Show deal</button>\n'
-    + '            </div>'
-    + '                 <div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" >Available!</p>\n'
-    + '                <button class="cars_order" >Show deal</button>\n'
-    + '            </div>'
-    + '                 <div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" >Available!</p>\n'
-    + '                <button class="cars_order" >Show deal</button>\n'
-    + '            </div>'
-    + '                 <div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" >Available!</p>\n'
-    + '                <button class="cars_order" >Show deal</button>\n'
-    + '            </div>'));
-}
+
 function getSelect() {
 	const container = document.getElementById('infoC');
 	container.style.height = '400px';

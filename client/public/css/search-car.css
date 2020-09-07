@@ -113,6 +113,9 @@ input {
 .inner-div-lease{
   display: none;
 }
+#fileupload{
+    background-color:darkgray;
+}
 .inner-div-button{/*red button*/
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: red;
