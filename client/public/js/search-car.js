@@ -66,7 +66,7 @@ function show() {
 		$('#Color-div').append('White');
 		$('#Seats-div').append('5 Adults');
 		$('#Bags-div').append('3 Bags');
-		$('#Available-div').append('Yes');
+		$('#Available-div').append('Yees');
 	}
 }
 function showDeal() {
