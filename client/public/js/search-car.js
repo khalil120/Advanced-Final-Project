@@ -1,14 +1,29 @@
+flag = 0;
 function show() {
-	$('#lease_cars_div').append($('<div class="cars_container">\n'
+	if (flag == 0) {
+		flag = 1;
+		$('#lease_cars_div').append($('<div class="cars_container">\n'
     + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
     + '                <p class="cars_price" >189₪ per day </p>\n'
     + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
     + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" >Available!</p>\n'
-    + '                <button class="cars_order" data-toggle="modal" data-target="#DealModal"  onclick="showDeal()" >Show deal</button>\n'
+    + '                <p class="available" id="available_car">Available!</p>\n'
+    + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
+    + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
+    + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
+    + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
     + '            </div>'));
-	$('#Price-div').append('300');
-	const carType = $('#csearch').val();
+		$('#Price-div').append('189₪');
+		$('#Model-div').append('Hyundai IONIQ Electric');
+		$('#Year-div').append('2019');
+		$('#Gearbox-div').append('Automatic');
+		$('#Color-div').append('White');
+		$('#Seats-div').append('5 Adults');
+		$('#Bags-div').append('3 Bags');
+		$('#Available-div').append('Yes');
+	}
+
+	/* const carType = $('#csearch').val();
 	const searchType = $('.car-list option:selected').val();
 	let url;
 	if (searchType === 'Buy') url = '/show-buy';
@@ -32,10 +47,14 @@ function show() {
 		});
 	}).fail((res) => {
 		alert('error!');
-	});
+	}); */
 }
 function showDeal() {
-
+	document.getElementById('available_car').style.display = 'none';
+	document.getElementById('year_car').style.display = 'contents';
+	document.getElementById('gearbox_car').style.display = 'contents';
+	document.getElementById('color_car').style.display = 'contents';
+	document.getElementById('showDeal').textContent = 'Order';
 }
 function getSelect() {
 	const container = document.getElementById('infoC');
