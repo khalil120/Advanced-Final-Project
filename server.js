@@ -32,15 +32,13 @@ app.get('/login', anonymouse, (req, res) => {
 app.get('/register', anonymouse, (req, res) => {
 	fs.createReadStream('./client/reg.html').pipe(res);
 });
-app.get('/upload', (req, res) => {
-	fs.createReadStream('./client/uploadimg.html').pipe(res);
+app.get('/post-car', authorized, (req, res) => {
+	fs.createReadStream('./client/upload-car.html').pipe(res);
 });
 app.get('/contact-us', (req, res) => {
 	fs.createReadStream('./client/contact-us.html').pipe(res);
 });
-app.get('/post-car', authorized, (req, res) => {
-	fs.createReadStream('./client/post.html').pipe(res);
-});
+
 app.get('/search-car', (req, res) => {
 	fs.createReadStream('./client/search-car.html').pipe(res);
 });
