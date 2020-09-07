@@ -13,11 +13,12 @@ $(document).ready(() => {
 			console.log(res);
 
 			$.each(res, (index, item) => {
+				console.log(item);
 				$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
                 <p class="cars_price" >${item.price}</p>
-               <p class="cars_name" >${item.model}</p>
-                <p class="cars_desc" >${item.seats} Adults, ${item.bags} bags</p>
+               <p class="cars_name" >${item.carModel}</p>
+                <p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
                <p class="available" >Available!</p>
                 <button class="cars_order" >Show deal</button>
                 </div>`);
