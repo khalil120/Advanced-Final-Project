@@ -158,7 +158,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		// add file name in get request
 		// add search via date and price
 		const { toDate, fromDate } = req.body;
-
+		const { carType } = req.body;
 		const collection = db.collection('carRale');
 		if (carType.length > 0) {
 			collection.find({ }).toArray((err, docs) => {

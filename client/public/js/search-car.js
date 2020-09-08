@@ -1,19 +1,20 @@
 $(document).ready(() => {
-	const carType = $('#csearch').val();
-	const searchType = $('.car-list option:selected').val();
-	let url;
-	if (searchType === 'Buy') url = '/show-buy';
-	else url = '/show-rent';
-	$('#lease_cars_div').html('');
-	$('#sale_cars_div').html('');
-	$.post(url, { carType }, 'json').done((res, status) => {
-		if (url === '/show-buy') divName = '#sale_cars_div';
-		else divName = '#lease_cars_div';
-		console.log(res);
-		console.log(res.file);
-		$.each(res, (index, item) => {
-			console.log('helo');
-			$(divName).append(`<div class="cars_container" id="${item.filename}">
+	$(document).on('click', '.inner-div-button', () => {
+		const carType = $('#csearch').val();
+		const searchType = $('.car-list option:selected').val();
+		let url;
+		if (searchType === 'Buy') url = '/show-buy';
+		else url = '/show-rent';
+		$('#lease_cars_div').html('');
+		$('#sale_cars_div').html('');
+		$.post(url, { carType }, 'json').done((res, status) => {
+			if (url === '/show-buy') divName = '#sale_cars_div';
+			else divName = '#lease_cars_div';
+			console.log(res);
+			console.log(res.file);
+			$.each(res, (index, item) => {
+				console.log('helo');
+				$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
                 <p class="cars_price" >${item.price}</p>
                <p class="cars_name" >${item.model}</p>
@@ -21,17 +22,18 @@ $(document).ready(() => {
                <p class="available" >Available!</p>
                 <button class="cars_order">Show deal</button>
                 </div>`);
-			$('#Price-div').append(item.price);
-			$('#Model-div').append(item.model);
-			$('#Year-div').append('2019');
-			$('#Gearbox-div').append(item.gearBox);
-			$('#Color-div').append(item.carColor);
-			$('#Seats-div').append(item.seats);
-			$('#Bags-div').append(item.bags);
-			$('#Available-div').append('Yes');
+				$('#Price-div').append(item.price);
+				$('#Model-div').append(item.model);
+				$('#Year-div').append('2019');
+				$('#Gearbox-div').append(item.gearBox);
+				$('#Color-div').append(item.carColor);
+				$('#Seats-div').append(item.seats);
+				$('#Bags-div').append(item.bags);
+				$('#Available-div').append('Yes');
+			});
+		}).fail((res) => {
+			alert('error!');
 		});
-	}).fail((res) => {
-		alert('error!');
 	});
 });
 function show() {
@@ -92,9 +94,11 @@ function getSelect() {
 
 	if (selected.options[selected.selectedIndex].value == 'Buy') {
 		document.getElementById('inner-lease').style.display = 'contents';
-		document.getElementById('carModel').style.display = 'inline-block';
+		document.getElementById('csearch').style.display = 'inline';
+		document.getElementById('csearch-label').style.display = 'inherit';
 	} else if (selected.options[selected.selectedIndex].value == 'Lease') {
 		document.getElementById('inner-lease').style.display = 'contents';
-		document.getElementById('carModel').style.display = 'none';
+		document.getElementById('csearch').style.display = 'none';
+		document.getElementById('csearch-label').style.display = 'none';
 	}
 }
