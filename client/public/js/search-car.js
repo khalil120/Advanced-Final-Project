@@ -1,4 +1,3 @@
-flag = 0;
 $(document).ready(() => {
 	const carType = $('#csearch').val();
 	const searchType = $('.car-list option:selected').val();
