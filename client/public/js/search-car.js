@@ -12,25 +12,28 @@ $(document).ready(() => {
 			else divName = '#lease_cars_div';
 			console.log(res);
 			console.log(res.file);
-			$.each(res, (index, item) => {
-				console.log('helo');
-				$(divName).append(`<div class="cars_container" id="${item.filename}">
+			if (url === '/show-buy') {
+				$.each(res, (index, item) => {
+					console.log(item);
+					$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
-                <p class="cars_price" >${item.price}</p>
-               <p class="cars_name" >${item.model}</p>
-                <p class="cars_desc" >${item.seats} Adults, ${item.bags} bags</p>
+                <p class="cars_price" ><b>price:</b>${item.price}</p>
+               <p class="cars_name" >${item.carModel}</p>
+                <p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
                <p class="available" >Available!</p>
                 <button class="cars_order">Show deal</button>
                 </div>`);
-				$('#Price-div').append(item.price);
-				$('#Model-div').append(item.model);
-				$('#Year-div').append('2019');
-				$('#Gearbox-div').append(item.gearBox);
-				$('#Color-div').append(item.carColor);
-				$('#Seats-div').append(item.seats);
-				$('#Bags-div').append(item.bags);
-				$('#Available-div').append('Yes');
-			});
+					$('#Price-div').append(item.price);
+					$('#Model-div').append(item.carModel);
+					$('#Year-div').append(item.roadEntry);
+					$('#Gearbox-div').append(item.gearBox);
+					$('#Color-div').append(item.carColor);
+					$('#Seats-div').append(item.seats);
+					$('#Bags-div').append(item.airBags);
+					$('#Available-div').append('Yes');
+				});
+			} else { // add here show rent
+			}
 		}).fail((res) => {
 			alert('error!');
 		});
