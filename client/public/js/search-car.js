@@ -13,6 +13,7 @@ $(document).ready(() => {
 		console.log(res);
 		console.log(res.file);
 		$.each(res, (index, item) => {
+			console.log('helo');
 			$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="public/img/${item.filename}" height="150" width="100%"/>
                 <p class="cars_price" >${item.price}</p>
