@@ -27,7 +27,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url: dataurl, // mongodb Connection URL
+		url, // mongodb Connection URL
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -107,7 +107,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 
 		const collection = db.collection('carSale');
 		if (carType.length > 0) {
-			collection.find({ model: carType }).toArray((err, docs) => {
+			collection.find({ carModel: carType }).toArray((err, docs) => {
 				assert.equal(err, null);
 
 				const array = [];
