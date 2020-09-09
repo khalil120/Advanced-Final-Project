@@ -38,7 +38,7 @@ $(document).ready(() => {
                         <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
                         <p class="cars_price" ><b>price:</b>${item.priceDay}</p>
                         <p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
-                        <p class="cars_leas_date">From Date: ${items.fromDate} - to Date: ${items.toDate}</p>
+                        <p class="cars_leas_date">From Date: ${item.fromDate} - to Date: ${items.toDate}</p>
                         <p class="available" >Available!</p>
                          <button class="cars_order">Show deal</button>
                         </div>`);
