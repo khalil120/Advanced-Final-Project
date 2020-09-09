@@ -10,14 +10,14 @@ $(document).ready(() => {
 		$.post(url, { carType }, 'json').done((res, status) => {
 			if (url === '/show-buy') divName = '#sale_cars_div';
 			else divName = '#lease_cars_div';
-			console.log(res);
-			console.log(res.file);
+			console.log('the response is: '); /// /////////////////////////////////////////
+			console.log(res); /// ///////printing the response
+			console.log(res.length); /// printinh the response length
 			if (url === '/show-buy') {
 				console.log('from buy option');
 				$.each(res, (index, item) => {
 					// eslint-disable-next-line spaced-comment
-					console.log(item);
-					console.log('oononononononon');
+					console.log(item); ///////////////////////////////////////
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
                 <p class="cars_price" ><b>price:</b>${item.price}</p>
@@ -36,7 +36,7 @@ $(document).ready(() => {
 					$('#Available-div').append('Yes');
 				});
 			} else { // add here show rent ->  url = /show-rent
-
+				console.log('im hereeeeeeeeeeeeeeeeeeeeeeeeeeee'); /// ///////////////////////////////
 			}
 		}).fail((res) => {
 			alert('error!');
