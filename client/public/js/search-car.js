@@ -32,13 +32,14 @@ $(document).ready(() => {
 					$('#Available-div').append('Yes');
 				});
 			} else { // add here show rent ->  url = /show-rent
+				/*
 				$.each(res, (index, item) => {
 					console.log(item);
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
-                        <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
+            <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
                         <p class="cars_price" ><b>price:</b>${item.priceDay}</p>
                         <p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
-                        <p class="cars_leas_date">From Date: ${item.fromDate} - to Date: ${item.toDate}</p>
+                <p class="cars_leas_date">From Date: ${item.fromDate} - to Date: ${item.toDate}</p>
                         <p class="available" >Available!</p>
                          <button class="cars_order">Show deal</button>
                         </div>`);
@@ -50,7 +51,7 @@ $(document).ready(() => {
 					$('#Seats-div').append(item.seats);
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
-				});
+				}); */
 			}
 		}).fail((res) => {
 			alert('error!');
