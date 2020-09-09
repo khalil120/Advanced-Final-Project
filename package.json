@@ -31,7 +31,7 @@
     "multer-gridfs-storage": "^4.2.0"
   },
   "devDependencies": {
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "husky": "^4.2.5",
