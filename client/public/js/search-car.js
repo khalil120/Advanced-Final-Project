@@ -13,8 +13,11 @@ $(document).ready(() => {
 			console.log(res);
 			console.log(res.file);
 			if (url === '/show-buy') {
+				console.log('from buy option');
 				$.each(res, (index, item) => {
+					// eslint-disable-next-line spaced-comment
 					console.log(item);
+					console.log('oononononononon');
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
                 <p class="cars_price" ><b>price:</b>${item.price}</p>
@@ -32,38 +35,40 @@ $(document).ready(() => {
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
 				});
-			} else { // add here show rent
+			} else { // add here show rent ->  url = /show-rent
+
 			}
 		}).fail((res) => {
 			alert('error!');
 		});
 	});
 });
+
 function show() {
 	if (flag == 0) {
 		flag = 1;
 		$('#lease_cars_div').append($('<div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" id="available_car">Available!</p>\n'
-    + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
-    + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
-    + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
-    + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
-    + '            </div>'
-    + '                <div class="cars_container">\n'
-    + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-    + '                <p class="cars_price" >189₪ per day </p>\n'
-    + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-    + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-    + '                <p class="available" id="available_car">Available!</p>\n'
-    + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
-    + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
-    + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
-    + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
-    + '            </div>'));
+            + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
+            + '                <p class="cars_price" >189₪ per day </p>\n'
+            + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
+            + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
+            + '                <p class="available" id="available_car">Available!</p>\n'
+            + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
+            + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
+            + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
+            + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
+            + '            </div>'
+            + '                <div class="cars_container">\n'
+            + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
+            + '                <p class="cars_price" >189₪ per day </p>\n'
+            + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
+            + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
+            + '                <p class="available" id="available_car">Available!</p>\n'
+            + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
+            + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
+            + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
+            + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
+            + '            </div>'));
 		$('#Price-div').append('189₪');
 		$('#Model-div').append('Hyundai IONIQ Electric');
 		$('#Year-div').append('2019');
@@ -74,6 +79,7 @@ function show() {
 		$('#Available-div').append('Yees');
 	}
 }
+
 function showDeal() {
 	/* document.getElementById('available_car').style.display = 'none';
 	document.getElementById('year_car').style.display = 'contents';
@@ -82,13 +88,16 @@ function showDeal() {
     document.getElementById('showDeal').textContent = 'Order'; */
 	document.getElementById('showDeal').style.backgroundColor = 'gray';
 }
+
 function doneDeal() {
 	document.getElementById('showDeal').style.backgroundColor = 'red';
 }
+
 function order() {
 	document.getElementById('order-msg').textContent = 'Your order is completed!';
 	document.getElementById('order-msg').style.color = 'green';
 }
+
 function getSelect() {
 	const container = document.getElementById('infoC');
 	container.style.height = '400px';

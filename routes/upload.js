@@ -49,7 +49,15 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		const collection = db.collection('carSale');
 
 		const {
-			milege, engineType, gearBox, carColor, roadEntry, price, carModel, airBags, seats,
+			milege,
+			engineType,
+			gearBox,
+			carColor,
+			roadEntry,
+			price,
+			carModel,
+			airBags,
+			seats,
 		} = req.body;
 		const { username } = req.user;
 		const data = {
@@ -133,7 +141,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		} else {
 			collection.find({}).toArray((err, docs) => {
 				assert.equal(err, null);
-
 				const array = [];
 				const imageNmae = [];
 				docs.forEach((element) => {
@@ -157,13 +164,14 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	routerUpload.post('/show-rent', (req, res) => {
 		// add file name in get request
 		// add search via date and price
+
 		const { toDate, fromDate } = req.body;
 		const { carType } = req.body;
-		const collection = db.collection('carRale');
+		const collection = db.collection('carRent');
 		if (carType.length > 0) {
-			collection.find({ }).toArray((err, docs) => {
+			collection.find({ carModel: carType }).toArray((err, docs) => {
 				assert.equal(err, null);
-
+				imageNmae.push(element.filename);
 				const array = [];
 				const imageNmae = [];
 				docs.forEach((element) => {
@@ -184,10 +192,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 
 				res.status(200).send(array);
 			});
-		} else {
+		} else { // show all available cars for rent
+			console.log('cartType not  inserted....'); /// ///////////////////////////////////////////////
+			// the problem is docs is empty !!!
 			collection.find({}).toArray((err, docs) => {
 				assert.equal(err, null);
-
 				const array = [];
 				const imageNmae = [];
 				docs.forEach((element) => {
@@ -203,7 +212,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
-					res.send(array);
+					res.status(200).send(array);
 				});
 			});
 		}
