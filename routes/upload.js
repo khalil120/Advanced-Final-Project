@@ -126,7 +126,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./client/public/img/${fileName}`),
+						fs.createWriteStream(`../client/public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
@@ -193,7 +193,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				res.status(200).send(array);
 			});
 		} else { // show all available cars for rent
-			console.log('cartType not  inserted....'); /// ///////////////////////////////////////////////
+			console.log(`cartType not  inserted.... ${url}`); /// ///////////////////////////////////////////////
 			// the problem is docs is empty !!!
 			collection.find({}).toArray((err, docs) => {
 				assert.equal(err, null);
