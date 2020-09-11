@@ -32,7 +32,6 @@ $(document).ready(() => {
 					$('#Available-div').append('Yes');
 				});
 			} else { // add here show rent ->  url = /show-rent
-				/*
 				$.each(res, (index, item) => {
 					console.log(item);
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
@@ -51,7 +50,7 @@ $(document).ready(() => {
 					$('#Seats-div').append(item.seats);
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
-				}); */
+				});
 			}
 		}).fail((res) => {
 			alert('error!');
