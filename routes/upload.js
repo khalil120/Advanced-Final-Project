@@ -117,7 +117,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		if (carType.length > 0) {
 			collection.find({ carModel: carType }).toArray((err, docs) => {
 				assert.equal(err, null);
-
 				const array = [];
 				const imageNmae = [];
 				docs.forEach((element) => {
@@ -141,6 +140,8 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		} else {
 			collection.find({}).toArray((err, docs) => {
 				assert.equal(err, null);
+
+				console.log(err);
 				const array = [];
 				const imageNmae = [];
 				docs.forEach((element) => {
@@ -180,7 +181,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./client/public/img/${fileName}`),
+						fs.createWriteStream(`/client/public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
@@ -205,7 +206,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./client/public/img/${fileName}`),
+						fs.createWriteStream(`/client/public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
