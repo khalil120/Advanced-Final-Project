@@ -129,11 +129,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`../public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							res.sendStatus(404);
+							return res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -152,7 +152,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`../public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
@@ -187,11 +187,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`../public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							res.sendStatus(404);
+							return res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -210,7 +210,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`../public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
