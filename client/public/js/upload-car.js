@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-globals */
 $(document).ready(() => {
 	$(document).on('click', '.inner-div-button', () => {
 		const carType = $('#csearch').val();
