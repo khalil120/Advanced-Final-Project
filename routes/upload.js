@@ -218,7 +218,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						console.log(`${fileName} download complete!`);
 					});
 					//
-					return res.status(200).send(array);
+					return res.send(array);
 				});
 			});
 		}
