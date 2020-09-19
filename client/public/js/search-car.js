@@ -1,19 +1,21 @@
+/* eslint-disable linebreak-style */
 $(document).ready(() => {
 	$(document).on('click', '.inner-div-button', () => {
 		const carType = $('#csearch').val();
 		const searchType = $('.car-list option:selected').val();
+		const startDate = $('#fromDate').val();
+		const endDate = $('#toDate').val();
+		const minPrice = $('#fromPrice').val();
+		const maxPrice = $('#toPrice').val();
 		let url;
 		if (searchType === 'Buy') url = '/show-buy';
 		else url = '/show-rent';
 		$('#lease_cars_div').html('');
 		$('#sale_cars_div').html('');
-		$.post(url, { carType }, 'json').done((res, status) => {
-			if (url === '/show-buy') divName = '#sale_cars_div';
-			else divName = '#lease_cars_div';
-			if (url === '/show-buy') {
+		if (url === '/show-buy') {
+			$.post(url, { carType }, 'json').done((res, status) => {
+				divName = '#sale_cars_div';
 				$.each(res, (index, item) => {
-					// eslint-disable-next-line spaced-comment
-					//	console.log(item); ///////////////////////////////////////
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
                <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
                 <p class="cars_price" ><b>price:</b>${item.price}</p>
@@ -31,17 +33,25 @@ $(document).ready(() => {
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
 				});
-			} else { // add here show rent ->  url = /show-rent
+			}).fail((res) => {
+				alert('error!');
+			});
+		} else { // url = /show-rent
+			divName = '#lease_cars_div';
+
+			$.post(url, {
+				startDate, endDate, minPrice, maxPrice,
+			}, 'json').done((res, status) => {
 				$.each(res, (index, item) => {
 					console.log(item);
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
-            <img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
-                        <p class="cars_price" ><b>price:</b>${item.priceDay}</p>
-                        <p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
-                <p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
-                        <p class="available" >Available!</p>
-                         <button class="cars_order">Show deal</button>
-                        </div>`);
+	<img class="cars_image" src="/public/img/${item.filename}" height="150" width="100%"/>
+				<p class="cars_price" ><b>price:</b>${item.priceDay}</p>
+				<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
+		<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
+				<p class="available" >Available!</p>
+				 <button class="cars_order">Show deal</button>
+				</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
 					$('#Year-div').append(item.roadEntry);
@@ -51,10 +61,10 @@ $(document).ready(() => {
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
 				});
-			}
-		}).fail((res) => {
-			alert('error!');
-		});
+			}).fail((res) => {
+				alert('error!');
+			});
+		}
 	});
 });
 

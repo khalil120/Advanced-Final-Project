@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-globals */
+
 (function ($) {
 	/*= =================================================================
     [ Validate ] */
