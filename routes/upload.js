@@ -139,7 +139,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					});
 				});
 
-				res.status(200).send(array);
+				return res.status(200).send(array);
 			});
 		} else {
 			collection.find({}).toArray((err, docs) => {
@@ -160,7 +160,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						console.log(`${fileName} download complete!`);
 					});
 				});
-				res.status(200).send(array);
+				return res.status(200).send(array);
 			});
 		}
 	});
@@ -197,7 +197,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					});
 				});
 
-				res.status(200).send(array);
+				return res.status(200).send(array);
 			});
 		} else { // show all available cars for rent
 			collection.find({}).toArray((err, docs) => {
@@ -218,7 +218,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						console.log(`${fileName} download complete!`);
 					});
 					// small fixes
-					res.status(200).send(array);
+					return res.status(200).send(array);
 				});
 			});
 		}
