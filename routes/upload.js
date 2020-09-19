@@ -29,7 +29,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url: dataurl, // mongodb Connection URL
+		url, // mongodb Connection URL, on localHost change this to be url: dataurl,
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -114,7 +114,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 	routerUpload.post('/show-buy', (req, res) => {
 		// add file name in get request
-		console.log(req.body);
 
 		const { carType } = req.body;
 		// console.log(storage);
@@ -168,13 +167,17 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	routerUpload.post('/show-rent', (req, res) => {
 		// add file name in get request
 		// add search via date and price
-		console.log(req.body);
+
 		const carType = 'to be changed!!';
-		console.log(carType);
+		const startD = req.body.startDate;
+		const endD = req.body.endDate;
+		const minPr = req.body.minPrice;
+		const maxPr = req.body.maxPrice;
+
 		const collection = db.collection('carRent');
 
-		if (carType.length > 0) {
-			collection.find({ carModel: carType }).toArray((err, docs) => {
+		if (minPr.length > 0) {
+			collection.find({ priceDay: minPr }).toArray((err, docs) => {
 				assert.ifError(err);
 				const array = [];
 				const imageNmae = [];
@@ -198,7 +201,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 			});
 		} else { // show all available cars for rent
 			collection.find({}).toArray((err, docs) => {
-				assert.equal(err, null);
+				assert.ifError(err);
 				const array = [];
 				const imageNmae = [];
 				docs.forEach((element) => {
