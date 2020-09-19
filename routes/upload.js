@@ -133,7 +133,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							 res.sendStatus(404);
+							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -191,7 +191,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							 res.sendStatus(404);
+							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -217,7 +217,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
-					//
+					/// /
 					return res.send(array);
 				});
 			});
