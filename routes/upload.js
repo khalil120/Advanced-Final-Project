@@ -169,7 +169,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		// add file name in get request
 		// add search via date and price
 
-		const carType = 'to be changed!!';
 		const startD = req.body.startDate;
 		const endD = req.body.endDate;
 		const minPr = req.body.minPrice;
@@ -177,29 +176,56 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 
 		const collection = db.collection('carRent');
 
-		if (minPr.length > 0) {
-			collection.find({ priceDay: minPr }).toArray((err, docs) => {
-				assert.ifError(err);
-				const array = [];
-				const imageNmae = [];
-				docs.forEach((element) => {
-					array.push(element);
-					imageNmae.push(element.filename);
-				});
-				imageNmae.forEach((fileName) => {
-					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
-					).on('error',
-						(error) => {
-							console.log('Error:-', error);
-							return res.sendStatus(404);
-						}).on('finish', () => {
-						console.log(`${fileName} download complete!`);
+		if (startD.length > 0 || minPr.length > 0) {
+			if (startD.length > 0) {
+				collection.find({ fromDate: startD }).toArray((err, docs) => {
+					assert.ifError(err);
+					const array = [];
+					const imageNmae = [];
+					docs.forEach((element) => {
+						array.push(element);
+						imageNmae.push(element.filename);
 					});
-				});
+					imageNmae.forEach((fileName) => {
+						bucket.openDownloadStreamByName(fileName).pipe(
+							fs.createWriteStream(`./public/img/${fileName}`),
+						).on('error',
+							(error) => {
+								console.log('Error:-', error);
+								return res.sendStatus(404);
+							}).on('finish', () => {
+							console.log(`${fileName} download complete!`);
+						});
+					});
 
-				return res.status(200).send(array);
-			});
+					return res.status(200).send(array);
+				});
+			}
+
+			if (minPr.length > 0) {
+				collection.find({ priceDay: minPr }).toArray((err, docs) => {
+					assert.ifError(err);
+					const array = [];
+					const imageNmae = [];
+					docs.forEach((element) => {
+						array.push(element);
+						imageNmae.push(element.filename);
+					});
+					imageNmae.forEach((fileName) => {
+						bucket.openDownloadStreamByName(fileName).pipe(
+							fs.createWriteStream(`./public/img/${fileName}`),
+						).on('error',
+							(error) => {
+								console.log('Error:-', error);
+								return res.sendStatus(404);
+							}).on('finish', () => {
+							console.log(`${fileName} download complete!`);
+						});
+					});
+
+					return res.status(200).send(array);
+				});
+			}
 		} else { // show all available cars for rent
 			collection.find({}).toArray((err, docs) => {
 				assert.ifError(err);
