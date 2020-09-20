@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable camelcase */
 
 const express = require('express');
 const crypto = require('crypto');
@@ -112,6 +113,27 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		collection.insertOne(data);
 		res.sendStatus(200);
 	});
+
+	routerUpload.post('/insert-order', (req, res) => {
+		const collection = db.collection('orders');
+		const {
+			car_id,
+			action,
+			response,
+			owner,
+		} = req.body;
+		const { ordering } = req.user;
+		const data = {
+			car_id,
+			action,
+			response,
+			owner,
+			ordering,
+		};
+		collection.insertOne(data);
+		return res.sendStatus(200);
+	});
+
 	routerUpload.post('/show-buy', (req, res) => {
 		// add file name in get request
 

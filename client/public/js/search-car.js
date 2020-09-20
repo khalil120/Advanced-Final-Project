@@ -123,7 +123,7 @@ function orderNow(item, dealType) {
 	if (conf) {
 		orderData.append('car_id', item._id);
 		orderData.append('action', action);
-		orderData.append('repsponse', 'not yet');
+		orderData.append('response', 'not yet');
 		orderData.append('owner', item.username);
 		$.ajax({
 			type: 'POST',
