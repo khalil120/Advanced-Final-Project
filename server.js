@@ -40,7 +40,7 @@ app.get('/contact-us', (req, res) => {
 	fs.createReadStream('./client/contact-us.html').pipe(res);
 });
 
-app.get('/search-car', (req, res) => {
+app.get('/search-car', authorized, (req, res) => {
 	fs.createReadStream('./client/search-car.html').pipe(res);
 });
 app.listen(PORT, () => {

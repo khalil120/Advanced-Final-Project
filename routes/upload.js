@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable camelcase */
 
 const express = require('express');
 const crypto = require('crypto');
@@ -29,7 +30,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url, // mongodb Connection URL, on localHost change this to be url: dataurl,
+		url: dataurl, // mongodb Connection URL, on localHost change this to be url: dataurl,
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -112,6 +113,27 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		collection.insertOne(data);
 		res.sendStatus(200);
 	});
+
+	routerUpload.post('/insert-order', (req, res) => {
+		const collection = db.collection('orders');
+		const {
+			car_id,
+			action,
+			response,
+			owner,
+		} = req.body;
+		const { ordering } = req.user;
+		const data = {
+			car_id,
+			action,
+			response,
+			owner,
+			ordering,
+		};
+		collection.insertOne(data);
+		return res.sendStatus(200);
+	});
+
 	routerUpload.post('/show-buy', (req, res) => {
 		// add file name in get request
 
@@ -133,7 +155,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							res.sendStatus(404);
+							return res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -156,6 +178,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
+							return res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -166,9 +189,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 	routerUpload.post('/show-rent', (req, res) => {
 		// add file name in get request
-		// add search via date and price
 
-		const carType = 'to be changed!!';
 		const startD = req.body.startDate;
 		const endD = req.body.endDate;
 		const minPr = req.body.minPrice;
@@ -176,29 +197,56 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 
 		const collection = db.collection('carRent');
 
-		if (minPr.length > 0) {
-			collection.find({ priceDay: minPr }).toArray((err, docs) => {
-				assert.ifError(err);
-				const array = [];
-				const imageNmae = [];
-				docs.forEach((element) => {
-					array.push(element);
-					imageNmae.push(element.filename);
-				});
-				imageNmae.forEach((fileName) => {
-					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
-					).on('error',
-						(error) => {
-							console.log('Error:-', error);
-							res.sendStatus(404);
-						}).on('finish', () => {
-						console.log(`${fileName} download complete!`);
+		if (startD.length > 0 || minPr.length > 0) {
+			if (startD.length > 0) {
+				collection.find({ fromDate: startD }).toArray((err, docs) => {
+					assert.ifError(err);
+					const array = [];
+					const imageNmae = [];
+					docs.forEach((element) => {
+						array.push(element);
+						imageNmae.push(element.filename);
 					});
-				});
+					imageNmae.forEach((fileName) => {
+						bucket.openDownloadStreamByName(fileName).pipe(
+							fs.createWriteStream(`./public/img/${fileName}`),
+						).on('error',
+							(error) => {
+								console.log('Error:-', error);
+								return res.sendStatus(404);
+							}).on('finish', () => {
+							console.log(`${fileName} download complete!`);
+						});
+					});
 
-				return res.status(200).send(array);
-			});
+					return res.status(200).send(array);
+				});
+			}
+
+			if (minPr.length > 0) {
+				collection.find({ priceDay: minPr }).toArray((err, docs) => {
+					assert.ifError(err);
+					const array = [];
+					const imageNmae = [];
+					docs.forEach((element) => {
+						array.push(element);
+						imageNmae.push(element.filename);
+					});
+					imageNmae.forEach((fileName) => {
+						bucket.openDownloadStreamByName(fileName).pipe(
+							fs.createWriteStream(`./public/img/${fileName}`),
+						).on('error',
+							(error) => {
+								console.log('Error:-', error);
+								return res.sendStatus(404);
+							}).on('finish', () => {
+							console.log(`${fileName} download complete!`);
+						});
+					});
+
+					return res.status(200).send(array);
+				});
+			}
 		} else { // show all available cars for rent
 			collection.find({}).toArray((err, docs) => {
 				assert.ifError(err);
@@ -214,10 +262,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
+							return res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
-					/// /
 					return res.send(array);
 				});
 			});
