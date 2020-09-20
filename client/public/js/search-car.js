@@ -23,7 +23,7 @@ $(document).ready(() => {
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${item._id}">Order now</button>
+                	<button class="cars_order" id = "${item._id}" onclick="orderNow({item},{url}")>Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -52,7 +52,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${item._id}">Order now</button>
+				 	<button class="cars_order" id = "${item._id}" onclick="orderNow({ item }, { url })">Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
@@ -103,6 +103,41 @@ function show() {
 		$('#Seats-div').append('5 Adults');
 		$('#Bags-div').append('3 Bags');
 		$('#Available-div').append('Yees');
+	}
+}
+
+function orderNow(item, dealType) {
+	// item is equal to the selcted car
+	// dealType to be buy or rent
+	let action;
+	let priceMsg;
+	const orderData = new FormData();
+	if (dealType === '/show-buy') {
+		action = 'buy';
+		priceMsg = `${item.price}NIS`;
+	} else {
+		action = 'rent';
+		priceMsg = `${item.priceDay}NIS per day`;
+	}
+	const conf = window.confirm(`please confirm to ${action} ${item.carModel} ${priceMsg}`);
+	if (conf) {
+		orderData.append('car_id', item._id);
+		orderData.append('action', action);
+		orderData.append('repsponse', 'not yet');
+		orderData.append('owner', item.username);
+		$.ajax({
+			type: 'POST',
+			url: '/insert-order',
+			data: orderData,
+			processData: false,
+			contentType: false,
+		}).done((res) => {
+			window.alert('your Order sent to the car owner');
+		}).fail((res) => {
+			alert('an error accured try again later...');
+		});
+	} else {
+		window.alert('your Order not completed...');
 	}
 }
 

@@ -38,7 +38,6 @@ $(document).ready(() => {
 			}
 		}
 		if ($('#carModel').val() < 1 || $('#gearBox').val() < 1 || $('#engineType').val() < 1 || $('#carColor').val() < 1) check = false;
-		console.log(check);
 		if (check) {
 			formData.append('img', file);
 			formData.append('gearBox', gearBox);
