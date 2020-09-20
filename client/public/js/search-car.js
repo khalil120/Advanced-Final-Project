@@ -23,7 +23,7 @@ $(document).ready(() => {
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${item._id}" onclick="orderNow(${item}, ${url})">Order now</button>
+                	<button class="cars_order" id = "${item._id}" onclick="orderNow(item, url)">Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -42,9 +42,7 @@ $(document).ready(() => {
 			$.post(url, {
 				startDate, endDate, minPrice, maxPrice,
 			}, 'json').done((res, status) => {
-				console.log(`the response is: ${res}`);
 				$.each(res, (index, item) => {
-					console.log(item._id);
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 					<p class="cars_name" >${item.carModel}</p>
@@ -52,7 +50,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${item._id}" onclick="orderNow(${item}, ${url})">Order now</button>
+				 	<button class="cars_order" id = "${item._id}" onclick="orderNow(item, url)">Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
