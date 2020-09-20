@@ -29,7 +29,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url, // mongodb Connection URL, on localHost change this to be url: dataurl,
+		url: dataurl, // mongodb Connection URL, on localHost change this to be url: dataurl,
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -167,7 +167,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 	routerUpload.post('/show-rent', (req, res) => {
 		// add file name in get request
-		// add search via date and price
 
 		const startD = req.body.startDate;
 		const endD = req.body.endDate;
@@ -245,7 +244,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
-					/// /
 					return res.send(array);
 				});
 			});
