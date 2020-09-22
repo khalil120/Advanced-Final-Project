@@ -22,6 +22,8 @@ const dataurl = `${url}/heroku_342hvvg9`;
 
 // make sure the db instance is open before passing into `Grid`
 
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	assert.ifError(err);
 	const db = client.db(dbName);
@@ -117,7 +119,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		res.sendStatus(200);
 	});
 
-	routerUpload.post('/insert-order', (req, res) => {
+	routerUpload.post('/insert-order', urlencodedParser, (req, res) => {
 		console.log(req.body);
 		console.log(req.user.username);
 		const collection = db.collection('orders');
