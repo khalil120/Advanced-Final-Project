@@ -23,7 +23,7 @@ $(document).ready(() => {
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${item._id}" onclick="orderNow(url)">Order now</button>
+                	<button class="cars_order" id = "${item._id}" onclick="orderNow()">Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -50,7 +50,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${item._id}" onclick="orderNow(url)">Order now</button>
+				 	<button class="cars_order" id = "${item._id}" onclick="orderNow()">Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
@@ -104,20 +104,18 @@ function show() {
 	}
 }
 
-function orderNow(dealType) {
+function orderNow() {
 	// item is equal to the selcted car
 	// dealType to be buy or rent
-	let action;
-	let priceMsg;
+
+	const action = 'rent';
+	const priceMsg = `${item.priceDay}NIS per day`;
 	const orderData = new FormData();
-	if (dealType === '/show-buy') {
-		action = 'buy';
-		priceMsg = `${item.price}NIS`;
-	} else {
-		action = 'rent';
-		priceMsg = `${item.priceDay}NIS per day`;
-	}
-	const conf = window.confirm(`please confirm to ${action} ${item.carModel} ${priceMsg}`);
+
+	// const conf = window.confirm(`please confirm to ${action} ${item.carModel} ${priceMsg}`);
+
+	const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
+
 	if (conf) {
 		orderData.append('car_id', 'the car id test');
 		orderData.append('action', action);
