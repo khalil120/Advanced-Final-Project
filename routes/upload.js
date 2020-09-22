@@ -119,6 +119,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 
 	routerUpload.post('/insert-order', (req, res) => {
 		console.log(req.user.username);
+		console.log(req.body);
 		const collection = db.collection('orders');
 		const {
 			car_id,
@@ -272,8 +273,8 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
-					return res.send(array);
 				});
+				return res.send(array);
 			});
 		}
 	});
