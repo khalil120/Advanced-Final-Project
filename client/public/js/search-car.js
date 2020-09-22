@@ -1,9 +1,9 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-array-constructor */
+/* eslint-disable radix */
 
 const items = new Array(); /// this array contain items list
-const selctedItems = new Array(); // contain th ides of the selcted buttons!!!
 
 $(document).ready(() => {
 	$(document).on('click', '.inner-div-button', () => {
@@ -31,7 +31,7 @@ $(document).ready(() => {
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${i}" onclick="orderNow()">Order now</button>
+                	<button class="cars_order" id = "${i}" >Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -62,7 +62,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${i}" onclick="orderNow()">Order now</button>
+				 	<button class="cars_order" id = "${i}" >Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
@@ -84,50 +84,13 @@ $(document).ready(() => {
 $('button').click(function () {
 	console.log(this.id);
 	if (this.id != 'show-btn') {
-		selctedItems.push(this.id);
 		orderNow(this.id);
 	}
 });
 
-function show() {
-	if (flag == 0) {
-		flag = 1;
-		$('#lease_cars_div').append($('<div class="cars_container">\n'
-            + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-            + '                <p class="cars_price" >189₪ per day </p>\n'
-            + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-            + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-            + '                <p class="available" id="available_car">Available!</p>\n'
-            + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
-            + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
-            + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
-            + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
-            + '            </div>'
-            + '                <div class="cars_container">\n'
-            + '                <img class="cars_image" src="public/images/test1.png" height="150" width="100%"/>\n'
-            + '                <p class="cars_price" >189₪ per day </p>\n'
-            + '                <p class="cars_name" >Hyundai IONIQ Electric</p>\n'
-            + '                <p class="cars_desc" >5 Adults, 3 bags</p>\n'
-            + '                <p class="available" id="available_car">Available!</p>\n'
-            + '                <p class="cars_desc" id="year_car" style="display:none;">Year : 2017</p>\n'
-            + '                <p class="cars_desc" id="gearbox_car" style="display:none;">Gearbox : automatic</p>\n'
-            + '                <p class="cars_desc" id="color_car" style="display:none;">Color : black</p>\n'
-            + '                <button class="cars_order" id="showDeal" data-toggle="modal" data-target="#DealModal" onclick="showDeal()" >Show deal</button>\n'
-            + '            </div>'));
-		$('#Price-div').append('189₪');
-		$('#Model-div').append('Hyundai IONIQ Electric');
-		$('#Year-div').append('2019');
-		$('#Gearbox-div').append('Automatic');
-		$('#Color-div').append('White');
-		$('#Seats-div').append('5 Adults');
-		$('#Bags-div').append('3 Bags');
-		$('#Available-div').append('Yees');
-	}
-}
-
 function orderNow(index) {
 	// index is equal the the index of the car in the array
-	const order = items[index];
+	const order = items[parseInt(index)];
 	let action;
 	let priceMsg;
 
