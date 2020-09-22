@@ -109,7 +109,7 @@ function orderNow() {
 	// dealType to be buy or rent
 
 	const action = 'rent';
-	const priceMsg = `${item.priceDay}NIS per day`;
+	const priceMsg = 'NIS per day';
 	const orderData = new FormData();
 
 	// const conf = window.confirm(`please confirm to ${action} ${item.carModel} ${priceMsg}`);
