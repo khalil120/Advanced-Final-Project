@@ -115,8 +115,6 @@ function orderNow(index) {
 
 	const conf = window.confirm(`please confirm to ${action} ${order.carModel}`);
 
-	// const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
-
 	if (conf) {
 		const carID = `${order._id}`;
 		const owner = `${order.username}`;
@@ -129,11 +127,11 @@ function orderNow(index) {
 		console.log(action);
 		console.log(resp);
 
-		orderData.append('car_id', carID);
-		orderData.append('carModel', carModel);
-		orderData.append('action', action);
-		orderData.append('response', resp);
-		orderData.append('owner', owner);
+		orderData.append('car_id', `${carID}`);
+		orderData.append('carModel', `${carModel}`);
+		orderData.append('action', `${action}`);
+		orderData.append('response', `${resp}`);
+		orderData.append('owner', `${owner}`);
 		$.ajax({
 			type: 'POST',
 			url: '/insert-order',
