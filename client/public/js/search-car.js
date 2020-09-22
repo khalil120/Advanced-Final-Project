@@ -23,7 +23,7 @@ $(document).ready(() => {
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${item._id}" onclick="orderNow(item, url)">Order now</button>
+                	<button class="cars_order" id = "${item._id}" onclick="orderNow(url)">Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -50,7 +50,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${item._id}" onclick="orderNow(item, url)">Order now</button>
+				 	<button class="cars_order" id = "${item._id}" onclick="orderNow(url)">Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
@@ -104,7 +104,7 @@ function show() {
 	}
 }
 
-function orderNow(item, dealType) {
+function orderNow(dealType) {
 	// item is equal to the selcted car
 	// dealType to be buy or rent
 	let action;
@@ -119,10 +119,10 @@ function orderNow(item, dealType) {
 	}
 	const conf = window.confirm(`please confirm to ${action} ${item.carModel} ${priceMsg}`);
 	if (conf) {
-		orderData.append('car_id', item._id);
+		orderData.append('car_id', 'the car id test');
 		orderData.append('action', action);
 		orderData.append('response', 'not yet');
-		orderData.append('owner', item.username);
+		orderData.append('owner', 'username test');
 		$.ajax({
 			type: 'POST',
 			url: '/insert-order',
