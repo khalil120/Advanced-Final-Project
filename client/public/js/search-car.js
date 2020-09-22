@@ -90,6 +90,10 @@ $(document).ready(() => {
 function orderNow(index) {
 	// index is equal the the index of the car in the array
 	const order = items[parseInt(index)];
+
+	console.log('selected car details: ');
+	console.log(order);
+
 	let action;
 	let priceMsg;
 
@@ -108,11 +112,13 @@ function orderNow(index) {
 	// const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
 
 	if (conf) {
+		const carID = order._id;
+		const owner = order.username;
 		const resp = 'not yet';
-		orderData.append('car_id', order._id);
+		orderData.append('car_id', carID);
 		orderData.append('action', action);
 		orderData.append('response', resp);
-		orderData.append('owner', order.username);
+		orderData.append('owner', owner);
 		$.ajax({
 			type: 'POST',
 			url: '/insert-order',
@@ -125,7 +131,7 @@ function orderNow(index) {
 			alert('an error accured try again later...');
 		});
 	} else {
-		window.alert('your Order not completed...');
+		window.alert('your Order Canceld...');
 	}
 }
 
