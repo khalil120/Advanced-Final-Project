@@ -111,7 +111,7 @@ function orderNow(index) {
 		actionMsg = ` ${order.priceDay} NIS per day`;
 	}
 
-	const conf = window.confirm(`please confirm to ${act} ${order.carModel}`);
+	const conf = window.confirm(`please confirm to ${action} ${order.carModel}`);
 
 	if (conf) {
 		const carID = order._id;
