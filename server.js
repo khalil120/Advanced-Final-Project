@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, 'client', 'public')));
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies

@@ -100,42 +100,44 @@ function orderNow(index) {
 	console.log('selected car details: ');
 	console.log(order);
 
-	let action;
+	let act;
 	let priceMsg;
 
 	if (order.action === 'sale') {
-		action = 'buy';
+		act = 'buy';
 		priceMsg = `${order.price} NIS`;
 	} else {
-		action = 'rent';
+		act = 'rent';
 		actionMsg = ` ${order.priceDay} NIS per day`;
 	}
 
-	const orderData = new FormData();
+	// const orderData = new FormData();
 
-	const conf = window.confirm(`please confirm to ${action} ${order.carModel}`);
+	const conf = window.confirm(`please confirm to ${act} ${order.carModel}`);
 
 	if (conf) {
 		const carID = `${order._id}`;
-		const owner = `${order.username}`;
+		const owner1 = `${order.username}`;
 		const carModel = `${order.carModel}`;
 		const resp = 'not yet';
 
-		console.log(`the car id is: ${carID}`);
-		console.log(`the owner is: ${owner}`);
-		console.log(`car model is ${carModel}`);
-		console.log(action);
-		console.log(resp);
-
+		const orderData = {
+			car_id: carID,
+			carModel,
+			action: act,
+			response: resp,
+			owner: owner1,
+		};
+		/*
 		orderData.append('car_id', carID);
 		orderData.append('carModel', carModel);
-		orderData.append('action', action);
+		orderData.append('action', act);
 		orderData.append('response', resp);
-		orderData.append('owner', owner);
+		orderData.append('owner', owner1); */
 		$.ajax({
 			type: 'POST',
 			url: '/insert-order',
-			data: orderData,
+			data: JSON.stringify(orderData),
 			processData: false,
 			contentType: false,
 		}).done((res) => {
