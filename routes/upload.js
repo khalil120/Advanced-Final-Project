@@ -128,14 +128,14 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 			response,
 			owner,
 		} = req.body;
-		const { ordering } = req.user.username;
+		const { username } = req.user;
 		const data = {
 			carID,
 			model,
 			action,
 			response,
 			owner,
-			ordering,
+			username, // the username is equal to the user who create the order
 		};
 		collection.insertOne(data);
 		return res.sendStatus(200);
