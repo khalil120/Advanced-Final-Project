@@ -113,7 +113,7 @@ function orderNow(index) {
 
 	const orderData = new FormData();
 
-	const conf = window.confirm(`please confirm to ${action} ${order.carModel} ${priceMsg}`);
+	const conf = window.confirm(`please confirm to ${action} ${order.carModel}`);
 
 	// const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
 
@@ -126,6 +126,8 @@ function orderNow(index) {
 		console.log(`the car id is: ${carID}`);
 		console.log(`the owner is: ${owner}`);
 		console.log(`car model is ${carModel}`);
+		console.log(action);
+		console.log(resp);
 
 		orderData.append('car_id', carID);
 		orderData.append('carModel', carModel);
