@@ -130,3 +130,20 @@ function orderNow(index) {
 		window.alert('your Order Canceld...');
 	}
 }
+
+function getSelect() {
+	const container = document.getElementById('infoC');
+	container.style.height = '400px';
+	container.style.background = '#0a5b79';
+	const selected = document.getElementById('cars');
+
+	if (selected.options[selected.selectedIndex].value == 'Buy') {
+		document.getElementById('inner-lease').style.display = 'contents';
+		document.getElementById('csearch').style.display = 'inline';
+		document.getElementById('csearch-label').style.display = 'inherit';
+	} else if (selected.options[selected.selectedIndex].value == 'Lease') {
+		document.getElementById('inner-lease').style.display = 'contents';
+		document.getElementById('csearch').style.display = 'none';
+		document.getElementById('csearch-label').style.display = 'none';
+	}
+}
