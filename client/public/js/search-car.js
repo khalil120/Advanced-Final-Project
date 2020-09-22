@@ -43,6 +43,12 @@ $(document).ready(() => {
 					$('#Available-div').append('Yes');
 					i++;
 				});
+				$('button').click(function () {
+					console.log(this.id);
+					if (this.id != 'show-btn') {
+						orderNow(this.id);
+					}
+				});
 			}).fail((res) => {
 				alert('error!');
 			});
