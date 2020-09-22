@@ -120,8 +120,15 @@ function orderNow(index) {
 	if (conf) {
 		const carID = `${order._id}`;
 		const owner = `${order.username}`;
+		const carModel = `${order.carModel}`;
 		const resp = 'not yet';
+
+		console.log(`the car id is: ${carID}`);
+		console.log(`the owner is: ${owner}`);
+		console.log(`car model is ${carModel}`);
+
 		orderData.append('car_id', carID);
+		orderData.append('carModel', carModel);
 		orderData.append('action', action);
 		orderData.append('response', resp);
 		orderData.append('owner', owner);

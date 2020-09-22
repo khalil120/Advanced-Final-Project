@@ -123,6 +123,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		const collection = db.collection('orders');
 		const {
 			car_id,
+			carModel,
 			action,
 			response,
 			owner,
@@ -130,6 +131,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		const { ordering } = req.user.username;
 		const data = {
 			car_id,
+			carModel,
 			action,
 			response,
 			owner,
