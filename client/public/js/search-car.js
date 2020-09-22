@@ -130,38 +130,3 @@ function orderNow(index) {
 		window.alert('your Order Canceld...');
 	}
 }
-
-function showDeal() {
-	/* document.getElementById('available_car').style.display = 'none';
-	document.getElementById('year_car').style.display = 'contents';
-	document.getElementById('gearbox_car').style.display = 'contents';
-	document.getElementById('color_car').style.display = 'contents';
-    document.getElementById('showDeal').textContent = 'Order'; */
-	document.getElementById('showDeal').style.backgroundColor = 'gray';
-}
-
-function doneDeal() {
-	document.getElementById('showDeal').style.backgroundColor = 'red';
-}
-
-function order() {
-	document.getElementById('order-msg').textContent = 'Your order is completed!';
-	document.getElementById('order-msg').style.color = 'green';
-}
-
-function getSelect() {
-	const container = document.getElementById('infoC');
-	container.style.height = '400px';
-	container.style.background = '#0a5b79';
-	const selected = document.getElementById('cars');
-
-	if (selected.options[selected.selectedIndex].value == 'Buy') {
-		document.getElementById('inner-lease').style.display = 'contents';
-		document.getElementById('csearch').style.display = 'inline';
-		document.getElementById('csearch-label').style.display = 'inherit';
-	} else if (selected.options[selected.selectedIndex].value == 'Lease') {
-		document.getElementById('inner-lease').style.display = 'contents';
-		document.getElementById('csearch').style.display = 'none';
-		document.getElementById('csearch-label').style.display = 'none';
-	}
-}
