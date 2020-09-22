@@ -116,10 +116,10 @@ function orderNow(index) {
 	const conf = window.confirm(`please confirm to ${act} ${order.carModel}`);
 
 	if (conf) {
-		const carID = `${order._id}`;
-		const owner = `${order.username}`;
-		const carModel = `${order.carModel}`;
-		const resp = 'not yet';
+		const { carID } = order._id;
+		const { owner } = order.username;
+		const { carModel } = order.carModel;
+		const { resp } = 'not yet';
 
 		/*
 		orderData.append('car_id', carID);
