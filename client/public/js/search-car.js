@@ -24,6 +24,7 @@ $(document).ready(() => {
 				let i = 0;
 				$.each(res, (index, item) => {
 					items.push(item);
+					console.log(item);
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 			   		<p class="cars_name" >${item.carModel}</p>
@@ -53,6 +54,7 @@ $(document).ready(() => {
 				let i = 0;
 				$.each(res, (index, item) => {
 					items.push(item);
+					console.log(item);
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 					<p class="cars_name" >${item.carModel}</p>
@@ -80,6 +82,7 @@ $(document).ready(() => {
 });
 
 $('button').click(function () {
+	console.log(this.id);
 	if (this.id != 'show-btn') {
 		selctedItems.push(this.id);
 		orderNow(this.id);
