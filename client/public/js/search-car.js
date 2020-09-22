@@ -1,5 +1,10 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-array-constructor */
+
+const items = new Array(); /// this array contain items list
+const selctedItems = new Array(); // contain th ides of the selcted buttons!!!
+
 $(document).ready(() => {
 	$(document).on('click', '.inner-div-button', () => {
 		const carType = $('#csearch').val();
@@ -16,14 +21,16 @@ $(document).ready(() => {
 		if (url === '/show-buy') {
 			$.post(url, { carType }, 'json').done((res, status) => {
 				divName = '#sale_cars_div';
+				let i = 0;
 				$.each(res, (index, item) => {
+					items.push(item);
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 			   		<p class="cars_name" >${item.carModel}</p>
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${item._id}" onclick="orderNow()">Order now</button>
+                	<button class="cars_order" id = "${i}" onclick="orderNow()">Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -33,6 +40,7 @@ $(document).ready(() => {
 					$('#Seats-div').append(item.seats);
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
+					i++;
 				});
 			}).fail((res) => {
 				alert('error!');
@@ -42,7 +50,9 @@ $(document).ready(() => {
 			$.post(url, {
 				startDate, endDate, minPrice, maxPrice,
 			}, 'json').done((res, status) => {
+				let i = 0;
 				$.each(res, (index, item) => {
+					items.push(item);
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 					<p class="cars_name" >${item.carModel}</p>
@@ -50,7 +60,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${item._id}" onclick="orderNow()">Order now</button>
+				 	<button class="cars_order" id = "${i}" onclick="orderNow()">Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
@@ -60,12 +70,20 @@ $(document).ready(() => {
 					$('#Seats-div').append(item.seats);
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
+					i++;
 				});
 			}).fail((res) => {
 				alert('error!');
 			});
 		}
 	});
+});
+
+$('button').click(function () {
+	if (this.id != 'show-btn') {
+		selctedItems.push(this.id);
+		orderNow(this.id);
+	}
 });
 
 function show() {
@@ -104,23 +122,32 @@ function show() {
 	}
 }
 
-function orderNow() {
-	// item is equal to the selcted car
-	// dealType to be buy or rent
+function orderNow(index) {
+	// index is equal the the index of the car in the array
+	const order = items[index];
+	let action;
+	let priceMsg;
 
-	const action = 'rent';
-	const priceMsg = 'NIS per day';
+	if (order.action === 'sale') {
+		action = 'buy';
+		priceMsg = `${order.price} NIS`;
+	} else {
+		action = 'rent';
+		actionMsg = ` ${order.priceDay}NIS per day`;
+	}
+
 	const orderData = new FormData();
 
-	// const conf = window.confirm(`please confirm to ${action} ${item.carModel} ${priceMsg}`);
+	const conf = window.confirm(`please confirm to ${action} ${order.carModel} ${priceMsg}`);
 
-	const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
+	// const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
 
 	if (conf) {
-		orderData.append('car_id', 'the car id test');
+		const resp = 'not yet';
+		orderData.append('car_id', order._id);
 		orderData.append('action', action);
-		orderData.append('response', 'not yet');
-		orderData.append('owner', 'username test');
+		orderData.append('response', resp);
+		orderData.append('owner', order.username);
 		$.ajax({
 			type: 'POST',
 			url: '/insert-order',
