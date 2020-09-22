@@ -105,10 +105,10 @@ function orderNow(index) {
 
 	if (order.action === 'sale') {
 		action = 'buy';
-		priceMsg = `${order.price} NIS`;
+		priceMsg = `${order.price.toString()} NIS`;
 	} else {
 		action = 'rent';
-		actionMsg = ` ${order.priceDay}NIS per day`;
+		actionMsg = ` ${order.priceDay.toString()} NIS per day`;
 	}
 
 	const orderData = new FormData();
