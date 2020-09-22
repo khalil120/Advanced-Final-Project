@@ -105,10 +105,10 @@ function orderNow(index) {
 
 	if (order.action === 'sale') {
 		action = 'buy';
-		priceMsg = `${order.price.toString()} NIS`;
+		priceMsg = `${order.price} NIS`;
 	} else {
 		action = 'rent';
-		actionMsg = ` ${order.priceDay.toString()} NIS per day`;
+		actionMsg = ` ${order.priceDay} NIS per day`;
 	}
 
 	const orderData = new FormData();
@@ -118,8 +118,8 @@ function orderNow(index) {
 	// const conf = window.confirm(`please confirm to ${action}  ${priceMsg}`);
 
 	if (conf) {
-		const carID = order._id;
-		const owner = order.username;
+		const carID = `${order._id}`;
+		const owner = `${order.username}`;
 		const resp = 'not yet';
 		orderData.append('car_id', carID);
 		orderData.append('action', action);
