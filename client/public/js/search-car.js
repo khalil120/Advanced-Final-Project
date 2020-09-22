@@ -1,5 +1,10 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-array-constructor */
+
+const items = new Array(); /// this array contain items list
+const selctedItems = new Array(); // contain th ides of the selcted buttons!!!
+
 $(document).ready(() => {
 	$(document).on('click', '.inner-div-button', () => {
 		const carType = $('#csearch').val();
@@ -16,6 +21,7 @@ $(document).ready(() => {
 		if (url === '/show-buy') {
 			$.post(url, { carType }, 'json').done((res, status) => {
 				divName = '#sale_cars_div';
+				let i = 0;
 				$.each(res, (index, item) => {
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
@@ -23,7 +29,7 @@ $(document).ready(() => {
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
 			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
-                	<button class="cars_order" id = "${item._id}" onclick="orderNow()">Order now</button>
+                	<button class="cars_order" id = "${i}" onclick="orderNow()">Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
 					$('#Model-div').append(item.carModel);
@@ -33,6 +39,7 @@ $(document).ready(() => {
 					$('#Seats-div').append(item.seats);
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
+					i++;
 				});
 			}).fail((res) => {
 				alert('error!');
@@ -42,6 +49,7 @@ $(document).ready(() => {
 			$.post(url, {
 				startDate, endDate, minPrice, maxPrice,
 			}, 'json').done((res, status) => {
+				let i = 0;
 				$.each(res, (index, item) => {
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
@@ -50,7 +58,7 @@ $(document).ready(() => {
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
 					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
-				 	<button class="cars_order" id = "${item._id}" onclick="orderNow()">Order now</button>
+				 	<button class="cars_order" id = "${i}" onclick="orderNow()">Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
 					$('#Model-div').append(item.carModel);
@@ -60,12 +68,19 @@ $(document).ready(() => {
 					$('#Seats-div').append(item.seats);
 					$('#Bags-div').append(item.airBags);
 					$('#Available-div').append('Yes');
+					i++;
 				});
 			}).fail((res) => {
 				alert('error!');
 			});
 		}
 	});
+});
+
+$('button').click(function () {
+	selctedItems.push(this.id);
+	orderNow(this.id);
+	window.alert(`${items[this.id]}added to your cart - dont forget to confirm your order!`);
 });
 
 function show() {
@@ -104,10 +119,10 @@ function show() {
 	}
 }
 
-function orderNow() {
+function orderNow(index) {
 	// item is equal to the selcted car
 	// dealType to be buy or rent
-
+	const order = items[index];
 	const action = 'rent';
 	const priceMsg = 'NIS per day';
 	const orderData = new FormData();
