@@ -140,7 +140,7 @@ function orderNow(index) {
 		}); */
 
 		const data = {
-			carID, carModel, action, response, owner,
+			carID, carModel, action, resp, owner,
 		};
 
 		$.post('/insert-order', data, 'json').done((res) => {
