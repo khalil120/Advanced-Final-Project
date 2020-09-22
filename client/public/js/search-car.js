@@ -118,10 +118,10 @@ function orderNow(index) {
 		const owner = order.username;
 		const model = order.carModel;
 		const response = 'not yet';
-
-		$.post('/insert-order', {
+		const data = {
 			carID, model, action, response, owner,
-		}, 'json').done((res) => {
+		};
+		$.post('/insert-order', data, 'json').done((res) => {
 			window.alert('your Order sent to the car owner');
 		}).fail((res) => {
 			alert('an error accured try again later...');
