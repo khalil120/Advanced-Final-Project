@@ -121,14 +121,12 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		console.log(req.user.username);
 		console.log(req.body);
 		const collection = db.collection('orders');
-		const {
-			car_id,
-			carModel,
-			action,
-			response,
-			owner,
-		} = req.body;
-		const { ordering } = req.user;
+		const { car_id } = req.body.carID;
+		const { carModel } = req.body.carModel1;
+		const { action } = req.body.act;
+		const { response } = req.body.resp;
+		const { owner } = req.body.owner;
+		const { ordering } = req.user.username;
 		const data = {
 			car_id,
 			carModel,
