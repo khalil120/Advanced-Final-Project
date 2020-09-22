@@ -118,6 +118,8 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	routerUpload.post('/insert-order', (req, res) => {
+		console.log(req.body);
+		console.log(req.user);
 		const collection = db.collection('orders');
 		const {
 			car_id,
