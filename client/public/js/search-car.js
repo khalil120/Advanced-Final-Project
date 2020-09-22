@@ -100,14 +100,14 @@ function orderNow(index) {
 	console.log('selected car details: ');
 	console.log(order);
 
-	let act;
+	let action;
 	let priceMsg;
 
 	if (order.action === 'sale') {
-		act = 'buy';
+		action = 'buy';
 		priceMsg = `${order.price} NIS`;
 	} else {
-		act = 'rent';
+		action = 'rent';
 		actionMsg = ` ${order.priceDay} NIS per day`;
 	}
 
@@ -116,11 +116,11 @@ function orderNow(index) {
 	if (conf) {
 		const carID = order._id;
 		const owner = order.username;
-		const carModel1 = order.carModel;
-		const resp = 'not yet';
+		const model = order.carModel;
+		const response = 'not yet';
 
 		$.post('/insert-order', {
-			carID, carModel1, act, resp, owner,
+			carID, model, action, response, owner,
 		}, 'json').done((res) => {
 			window.alert('your Order sent to the car owner');
 		}).fail((res) => {
