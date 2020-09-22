@@ -130,8 +130,8 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		} = req.body;
 		const { ordering } = req.user.username;
 		const data = {
-			car_id,
-			carModel,
+			carID,
+			model,
 			action,
 			response,
 			owner,
