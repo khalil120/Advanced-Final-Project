@@ -117,30 +117,33 @@ function orderNow(index) {
 
 	if (conf) {
 		const carID = `${order._id}`;
-		const owner1 = `${order.username}`;
+		const owner = `${order.username}`;
 		const carModel = `${order.carModel}`;
 		const resp = 'not yet';
 
-		const orderData = {
-			car_id: carID,
-			carModel,
-			action: act,
-			response: resp,
-			owner: owner1,
-		};
 		/*
 		orderData.append('car_id', carID);
 		orderData.append('carModel', carModel);
 		orderData.append('action', act);
 		orderData.append('response', resp);
 		orderData.append('owner', owner1); */
-		$.ajax({
+		/* $.ajax({
 			type: 'POST',
 			url: '/insert-order',
 			data: JSON.stringify(orderData),
 			processData: false,
 			contentType: false,
 		}).done((res) => {
+			window.alert('your Order sent to the car owner');
+		}).fail((res) => {
+			alert('an error accured try again later...');
+		}); */
+
+		const data = {
+			carID, carModel, action, response, owner,
+		};
+
+		$.post('/insert-order', data, 'json').done((res) => {
 			window.alert('your Order sent to the car owner');
 		}).fail((res) => {
 			alert('an error accured try again later...');
