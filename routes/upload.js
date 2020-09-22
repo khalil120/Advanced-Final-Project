@@ -145,7 +145,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		// add file name in get request
 
 		const { carType } = req.body;
-		// console.log(storage);
 		const collection = db.collection('carSale');
 		if (carType.length > 0) {
 			collection.find({ carModel: carType }).toArray((err, docs) => {
@@ -162,7 +161,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							return res.sendStatus(404);
+							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -185,7 +184,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							return res.sendStatus(404);
+							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -220,7 +219,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						).on('error',
 							(error) => {
 								console.log('Error:-', error);
-								return res.sendStatus(404);
+								res.sendStatus(404);
 							}).on('finish', () => {
 							console.log(`${fileName} download complete!`);
 						});
@@ -245,7 +244,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 						).on('error',
 							(error) => {
 								console.log('Error:-', error);
-								return res.sendStatus(404);
+								res.sendStatus(404);
 							}).on('finish', () => {
 							console.log(`${fileName} download complete!`);
 						});
@@ -269,7 +268,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							return res.sendStatus(404);
+							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
