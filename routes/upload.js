@@ -51,7 +51,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 
 	routerUpload.post('/upload-sale', upload.single('img'), (req, res) => {
 		const collection = db.collection('carSale');
-		const action = 'sale';
+		const { action } = 'sale';
 		const {
 			milege,
 			engineType,
@@ -84,7 +84,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 	routerUpload.post('/upload-rent', upload.single('img'), (req, res) => {
 		const collection = db.collection('carRent');
-		const action = 'rent';
+		const { action } = 'rent';
 		const {
 			engineType,
 			gearBox,
@@ -118,8 +118,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	routerUpload.post('/insert-order', (req, res) => {
-		console.log(req.user.username);
-		console.log(req.body);
 		const collection = db.collection('orders');
 		const {
 			carID,
