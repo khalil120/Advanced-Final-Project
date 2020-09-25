@@ -24,7 +24,7 @@ $(document).ready(() => {
 				let i = 0;
 				$.each(res, (index, item) => {
 					items.push(item);
-					console.log(item);
+
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 			   		<p class="cars_name" >${item.carModel}</p>
@@ -60,7 +60,7 @@ $(document).ready(() => {
 				let i = 0;
 				$.each(res, (index, item) => {
 					items.push(item);
-					console.log(item);
+
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
 					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
 					<p class="cars_name" >${item.carModel}</p>
@@ -96,9 +96,6 @@ $(document).ready(() => {
 function orderNow(index) {
 	// index is equal the the index of the car in the array
 	const order = items[parseInt(index)];
-
-	console.log('selected car details: ');
-	console.log(order);
 
 	let action;
 	let priceMsg;
