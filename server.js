@@ -46,6 +46,10 @@ app.get('/loginMsg', (req, res) => {
 app.get('/search-car', authorized, (req, res) => {
 	fs.createReadStream('./client/search-car.html').pipe(res);
 });
+
+app.get('/profile', authorized, (req, res) => {
+	fs.createReadStream('./client/profile.html').pipe(res);
+});
 app.listen(PORT, () => {
 	console.log(`Node server is running on port ${PORT}...`);
 });
