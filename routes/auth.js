@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
 const { authorized, parseUser, anonymouse } = require('../middlewares/auth');
+const { clientSaleCollection, clientRentCollection } = require('./upload');
 
 const router = express.Router();
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017'; // mongodb Connection URL
@@ -14,7 +15,7 @@ const COOKIE_NAME = 'cookie-jwt-access-token';
 
 function addUser(res, username, password, email) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-		assert.equal(null, err);
+		assert.ifError(err);
 		const db = client.db(dbName);
 		const collection = db.collection('users');
 
@@ -48,7 +49,7 @@ function addUser(res, username, password, email) {
 
 function checkUserName(res, email, password) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-		assert.equal(null, err);
+		assert.ifError(err);
 		const db = client.db(dbName);
 		const collection = db.collection('users');
 		// what to do with email ?
@@ -79,7 +80,30 @@ function checkUserName(res, email, password) {
 		});
 	});
 }
-
+function sendSaleCollection(req, res) {
+	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+		assert.ifError(err);
+		const db = client.db(dbName);
+		const collection = db.collection('carSale');
+		const { username } = req.user;
+		collection.find({ username }).toArray((err, docs) => {
+			assert.ifError(err);
+			res.status(200).send(docs);
+		});
+	});
+}
+function sendRentCollection(req, res) {
+	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+		assert.ifError(err);
+		const db = client.db(dbName);
+		const collection = db.collection('carRent');
+		const { username } = req.user;
+		collection.find({ username }).toArray((err, docs) => {
+			assert.ifError(err);
+			res.status(200).send(docs);
+		});
+	});
+}
 router.post('/login', (req, res) => {
 	if (!req.body) { // make sure request body exist
 		return res.sendStatus(400);
@@ -94,6 +118,12 @@ router.post('/register', (req, res) => {
 	}
 	const { username, password, email } = req.body;
 	addUser(res, username, password, email);
+});
+router.get('/client-sale-collection', clientSaleCollection, (req, res) => {
+	sendSaleCollection(req, res);
+});
+router.get('/client-rent-collection', clientRentCollection, (req, res) => {
+	sendRentCollection(req, res);
 });
 router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout

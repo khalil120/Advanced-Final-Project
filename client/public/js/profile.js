@@ -1,0 +1,12 @@
+$(document).ready(() => {
+	$.get('/client-sale-collection').done((data, status) => {
+		console.log(data);
+	}).fail((err) => {
+		console.log('error');
+	});
+	$.get('/client-rent-collection').done((data, status) => {
+		console.log(data);
+	}).fail((err) => {
+		console.log('error');
+	});
+});
