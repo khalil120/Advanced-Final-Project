@@ -123,8 +123,7 @@ function sendInOrdersCollection(req, res) {
 		assert.ifError(err);
 		const db = client.db(dbName);
 		const collection = db.collection('orders');
-		const { username } = req.user;
-		collection.find({ owner: username }).toArray((err, docs) => {
+		collection.find({ owner: req.user.username }).toArray((err, docs) => {
 			assert.ifError(err);
 			res.status(200).send(docs);
 		});
