@@ -50,10 +50,12 @@ $(document).ready(() => {
 			if (searchType === 'Buy') {
 				formData.append('milege', milege);
 				formData.append('price', price);
+				formData.append('action', 'sell');
 			} else {
 				formData.append('fromDate', fromDate);
 				formData.append('toDate', toDate);
 				formData.append('priceDay', priceDay);
+				formData.append('action', 'rent');
 			}
 			$.ajax({
 				type: 'POST',
