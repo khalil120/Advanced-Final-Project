@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 $(document).ready(() => {
 	$.get('/client-sale-collection').done((data, status) => {
 		console.log(data);

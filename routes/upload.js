@@ -30,7 +30,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url: dataurl, // mongodb Connection URL, on localHost change this to be url: dataurl,
+		url, // mongodb Connection URL, on localHost change this to be url: dataurl,
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -305,7 +305,7 @@ function clientSaleCollection(req, res, next) {
 }
 function clientRentCollection(req, res, next) {
 	const { username } = req.user;
-	DownloadImageForUser('carSale', username);
+	DownloadImageForUser('carRent', username);
 	return next();
 }
 module.exports = { routerUpload, clientSaleCollection, clientRentCollection };
