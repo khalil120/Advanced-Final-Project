@@ -104,6 +104,17 @@ function sendRentCollection(req, res) {
 		});
 	});
 }
+
+function sendOutOrdersCollection(req, res) {
+	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+		assert.ifError(err);
+		const db = client.db(dbName);
+		const collection = db.collection('orders');
+		const { username } = req.user;
+		res.status(200).send(docs);
+	});
+}
+
 router.post('/login', (req, res) => {
 	if (!req.body) { // make sure request body exist
 		return res.sendStatus(400);
@@ -124,6 +135,9 @@ router.get('/client-sale-collection', clientSaleCollection, (req, res) => {
 });
 router.get('/client-rent-collection', clientRentCollection, (req, res) => {
 	sendRentCollection(req, res);
+});
+router.get('/client-out-orders', (req, res) => {
+	sendOutOrdersCollection(req, res);
 });
 router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout

@@ -10,4 +10,9 @@ $(document).ready(() => {
 	}).fail((err) => {
 		console.log('error');
 	});
+	$.get('/client-out-orders').done((data, status) => {
+		console.log(data);
+	}).fail((err) => {
+		console.log('error');
+	});
 });
