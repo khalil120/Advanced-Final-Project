@@ -26,7 +26,7 @@ $(document).ready(() => {
 					items.push(item);
 
 					$(divName).append(`<div class="cars_container" id="${item.filename}">
-					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
+					<img class="cars_image" src="/img/${item.filename}" height="150" width="100%"/>
 			   		<p class="cars_name" >${item.carModel}</p>
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
@@ -62,7 +62,7 @@ $(document).ready(() => {
 					items.push(item);
 
 					$(divName).append(`<div class="cars_container" id = "${item.filename}">
-					<img class="cars_image" src="../img/${item.filename}" height="150" width="100%"/>
+					<img class="cars_image" src="/img/${item.filename}" height="150" width="100%"/>
 					<p class="cars_name" >${item.carModel}</p>
 					<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
