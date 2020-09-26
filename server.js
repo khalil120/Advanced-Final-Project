@@ -40,7 +40,9 @@ app.get('/post-car', authorized, (req, res) => {
 app.get('/contact-us', (req, res) => {
 	fs.createReadStream('./client/contact-us.html').pipe(res);
 });
-
+app.get('/loginMsg', (req, res) => {
+	fs.createReadStream('./client/loginMsg.html').pipe(res);
+});
 app.get('/search-car', authorized, (req, res) => {
 	fs.createReadStream('./client/search-car.html').pipe(res);
 });

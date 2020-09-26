@@ -30,7 +30,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 	});
 
 	const storage = new GridFsStorage({
-		url, // mongodb Connection URL, on localHost change this to be url: dataurl,
+		url: dataurl, // mongodb Connection URL, on localHost change this to be url: dataurl,
 		file: (req, file) => new Promise((resolve, reject) => {
 			crypto.randomBytes(16, (err, buf) => {
 				if (err) {
@@ -157,11 +157,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`./client/public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -180,11 +179,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`./client/public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});
@@ -215,11 +213,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					});
 					imageNmae.forEach((fileName) => {
 						bucket.openDownloadStreamByName(fileName).pipe(
-							fs.createWriteStream(`./public/img/${fileName}`),
+							fs.createWriteStream(`./client/public/img/${fileName}`),
 						).on('error',
 							(error) => {
 								console.log('Error:-', error);
-								res.sendStatus(404);
 							}).on('finish', () => {
 							console.log(`${fileName} download complete!`);
 						});
@@ -240,11 +237,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 					});
 					imageNmae.forEach((fileName) => {
 						bucket.openDownloadStreamByName(fileName).pipe(
-							fs.createWriteStream(`./public/img/${fileName}`),
+							fs.createWriteStream(`./client/public/img/${fileName}`),
 						).on('error',
 							(error) => {
 								console.log('Error:-', error);
-								res.sendStatus(404);
 							}).on('finish', () => {
 							console.log(`${fileName} download complete!`);
 						});
@@ -264,11 +260,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 				});
 				imageNmae.forEach((fileName) => {
 					bucket.openDownloadStreamByName(fileName).pipe(
-						fs.createWriteStream(`./public/img/${fileName}`),
+						fs.createWriteStream(`./client/public/img/${fileName}`),
 					).on('error',
 						(error) => {
 							console.log('Error:-', error);
-							res.sendStatus(404);
 						}).on('finish', () => {
 						console.log(`${fileName} download complete!`);
 					});

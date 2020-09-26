@@ -27,7 +27,7 @@ function parseUser(req, res, next) {
  */
 function authorized(req, res, next) {
 	if (!req.user) {
-		return res.sendStatus(403);
+		return res.redirect('/loginMsg');
 	}
 	return next();
 }
