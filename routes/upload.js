@@ -271,5 +271,41 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		}
 	});
 });
-
-module.exports = routerUpload;
+function DownloadImageForUser(collName, username) {
+	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+		assert.ifError(err);
+		const db = client.db(dbName);
+		const bucket = new mongodb.GridFSBucket(db, {
+			bucketName: 'imgRent',
+		});
+		const collection = db.collection(collName);
+		collection.find({ username }).toArray((err, docs) => {
+			assert.ifError(err);
+			const imageNmae = [];
+			docs.forEach((element) => {
+				imageNmae.push(element.filename);
+			});
+			imageNmae.forEach((fileName) => {
+				bucket.openDownloadStreamByName(fileName).pipe(
+					fs.createWriteStream(`./client/public/img/${fileName}`),
+				).on('error',
+					(error) => {
+						console.log('Error:-', error);
+					}).on('finish', () => {
+					console.log(`${fileName} download complete!`);
+				});
+			});
+		});
+	});
+}
+function clientSaleCollection(req, res, next) {
+	const { username } = req.user;
+	DownloadImageForUser('carSale', username);
+	return next();
+}
+function clientRentCollection(req, res, next) {
+	const { username } = req.user;
+	DownloadImageForUser('carSale', username);
+	return next();
+}
+module.exports = { routerUpload, clientSaleCollection, clientRentCollection };

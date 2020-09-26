@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const methodOverride = require('method-override');
 const authRouter = require('./routes/auth');
-const routerupload = require('./routes/upload');
+const { routerUpload } = require('./routes/upload');
 
 const { parseUser, anonymouse, authorized } = require('./middlewares/auth');
 
@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(parseUser);
 app.use(authRouter);
-app.use(routerupload);
+app.use(routerUpload);
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
