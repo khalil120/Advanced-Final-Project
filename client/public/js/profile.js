@@ -75,8 +75,8 @@ $(document).ready(() => {
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
 						<p>
-							<button class="resp_btn" id="acc_btn_${element._id}" style="background-color:green;" >Accept Order</button>
-							<button class="resp_btn" id="rej_btn_${element._id}" style="background-color:red;" >Reject Order</button>
+							<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
+							<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
 							
 						</p>
 						`);
@@ -89,8 +89,8 @@ $(document).ready(() => {
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
 						<p>
-							<button class="resp_btn_accept" style="background-color:green;" id="acc_btn_${element._id}">Accept Order</button>
-							<button class="resp_btn_reject" style="background-color:red;" id="rej_btn_${element._id}">Reject Order</button>
+							<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
+							<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
 	
 						</p>
 						`);
