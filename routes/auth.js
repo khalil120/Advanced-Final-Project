@@ -130,6 +130,32 @@ function sendInOrdersCollection(req, res) {
 		});
 	});
 }
+function deleteCar(req, res) {
+	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+		assert.ifError(err);
+		const { giganotosaurus, pteranodon } = req.body;
+		const db = client.db(dbName);
+
+		let stegosaurus = 'carRent';
+		if (pteranodon === 's') {
+			stegosaurus = 'carSale';
+		}
+		console.log(pteranodon, stegosaurus);
+		const collection = db.collection('imgRent.files');
+		const collection2 = db.collection('imgRent.chunks');
+		const collection3 = db.collection(stegosaurus);
+
+		collection.findOne({ filename: giganotosaurus }, (err, human) => {
+			assert.ifError(err);
+			// eslint-disable-next-line no-underscore-dangle
+			const humanId = human._id;
+			collection3.deleteOne({ filename: giganotosaurus });
+			collection2.deleteOne({ files_id: humanId });
+			collection.deleteOne({ filename: giganotosaurus });
+			res.sendStatus(200);
+		});
+	});
+}
 
 function updateOrderStatus(req, res) {
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
@@ -172,8 +198,11 @@ router.get('/client-out-orders', (req, res) => {
 router.get('/client-in-orders', (req, res) => {
 	sendInOrdersCollection(req, res);
 });
-router.get('/order-response', (req, res) => {
-	updateOrderStatus(req, res);
+router.post('/delete-car', (req, res) => {
+	if (!req.body) { // make sure request body exist
+		return res.sendStatus(400);
+	}
+	deleteCar(req, res);
 });
 router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout
