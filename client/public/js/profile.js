@@ -78,10 +78,6 @@ $(document).ready(() => {
 						<p>
 							<button class="resp_btn" id="acc_btn_${element._id}" style="background-color:green;" >Accept Order</button>
 							<button class="resp_btn" id="rej_btn_${element._id}" style="background-color:red;" >Reject Order</button>
-							<script>
-								$('#rej_btn_${element._id}').prop('disabled', ${active});
-								$('#acc_btn_${element._id}').prop('disabled', ${active});
-							</script>
 						</p>
 						`);
 			} else {
@@ -95,10 +91,6 @@ $(document).ready(() => {
 						<p>
 							<button class="resp_btn" style="background-color:green;" id="acc_btn_${element._id}">Accept Order</button>
 							<button class="resp_btn" style="background-color:red;" id="rej_btn_${element._id}">Reject Order</button>
-							<script>
-								$('#rej_btn_${element._id}').prop('disabled', ${active});
-								$('#acc_btn_${element._id}').prop('disabled', ${active});
-							</script>
 						</p>
 						`);
 			}
@@ -122,6 +114,7 @@ $(document).ready(() => {
 
 	$(document).on('click', '.resp_btn', () => {
 		const elemId = $(this).closest('.cars_container').attr('id');
+		console.log(`clicked from ${this.id}`);
 		let response = this.id.substr(0, 6);
 		const ordertype = elemId.substr(0, 4); // get the order type (order / rent)
 		const orderId = elemId.substr(5, elemId.length - 5);// get the order id
