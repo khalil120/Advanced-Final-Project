@@ -135,8 +135,12 @@ $(document).ready(() => {
 		const orderId = elemId.substr(5, elemId.length - 5);// get the order id
 		let order;
 
+		console.log(`clicked button ${this.id}`);
+
 		if (ordertype === 'buy') order = find(buyInOrders, orderId);
 		else order = find(rentInOrders, orderId);
+
+		console.log(order);
 
 		if (response === 'acc_btn') response = 'Accepted';
 		else response = 'Rejected';

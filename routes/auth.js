@@ -163,6 +163,8 @@ function updateOrderStatus(req, res) {
 		const db = client.db(dbName);
 		const collection = db.collection('orders');
 
+		console.log(req.body);
+
 		const oid = req.body._id;
 		const res = req.body.response;
 
