@@ -45,10 +45,6 @@ $(document).ready(() => {
 				<p class="order_type" > <b>Order type: Buy </b></p>
 				<p class="car_owner" > <b>car owner:  ${element.owner} </b></p>
 				<p class="order_status" ><b>Order Status: ${element.response}</b></p>
-				<p>
-					<button class="resp_btn" style="color:green; id="acc_btn_${element._id}" " >Accept Order</button>
-					<button class="resp_btn" style="color:red;" id="rej_btn_${element._id}" >Reject Order</button>
-				</p>
 				`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
@@ -57,10 +53,6 @@ $(document).ready(() => {
 				<p class="order_type" > <b>Order type: Rent </b></p>
 				<p class="car_owner" > <b>car owner:  ${element.owner} </b></p>
 				<p class="order_status" ><b>Order Status: ${element.response}</b></p>
-				<p>
-					<button class="resp_btn" style="color:green;" id="acc_btn_${element._id}">Accept Order</button>
-					<button class="resp_btn" style="color:red;" id="rej_btn_${element._id}">Reject Order</button>
-				</p>
 				`);
 			}
 		});
@@ -84,8 +76,8 @@ $(document).ready(() => {
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
 						<p>
-							<button class="resp_btn" id="acc_btn_${element._id}" style="color:green;" >Accept Order</button>
-							<button class="resp_btn" id="rej_btn_${element._id}" style="color:red;" >Reject Order</button>
+							<button class="resp_btn" id="acc_btn_${element._id}" style="background-color:green;" >Accept Order</button>
+							<button class="resp_btn" id="rej_btn_${element._id}" style="background-color:red;" >Reject Order</button>
 							<script>
 								$('#rej_btn_${element._id}').prop('disabled', ${active});
 								$('#acc_btn_${element._id}').prop('disabled', ${active});
@@ -101,8 +93,8 @@ $(document).ready(() => {
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
 						<p>
-							<button class="resp_btn" style="color:green;" id="acc_btn_${element._id}">Accept Order</button>
-							<button class="resp_btn" style="color:red;" id="rej_btn_${element._id}">Reject Order</button>
+							<button class="resp_btn" style="background-color:green;" id="acc_btn_${element._id}">Accept Order</button>
+							<button class="resp_btn" style="background-color:red;" id="rej_btn_${element._id}">Reject Order</button>
 							<script>
 								$('#rej_btn_${element._id}').prop('disabled', ${active});
 								$('#acc_btn_${element._id}').prop('disabled', ${active});
@@ -134,7 +126,7 @@ $(document).ready(() => {
 		const ordertype = elemId.substr(0, 4); // get the order type (order / rent)
 		const orderId = elemId.substr(5, elemId.length - 5);// get the order id
 		let order;
-
+		console.log(`click belong to ${elemId}`);
 		console.log(`clicked button ${this.id}`);
 
 		if (ordertype === 'buy') order = find(buyInOrders, orderId);
