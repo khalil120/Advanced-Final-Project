@@ -19,8 +19,6 @@ $(document).ready(() => {
 
 		data.array.forEach((element) => {
 			if (element.action === 'sale') {
-				// if the request response is not yet enable the buttons
-				const active = (element.response === 'not yet');
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-request-car-sale').append(`<div class="cars_container id="${element.carID}" >
 				<p class="cars_name" >${element.model}</p>
@@ -30,10 +28,6 @@ $(document).ready(() => {
 				<p>
 					<button class="resp_btn" style="color:green; id="acc_btn_${element._id}" " >Accept Order</button>
 					<button class="resp_btn" style="color:red;" id="rej_btn_${element._id}" >Reject Order</button>
-					<script>
-						document.getElementById("acc_btn_${element._id}").disabled = active;
-						document.getElementById("rej_btn_${element._id}").disabled = active;
-					</script>
 				</p>
 				`);
 			} else {
@@ -46,10 +40,6 @@ $(document).ready(() => {
 				<p>
 					<button class="resp_btn" style="color:green;" id="acc_btn_${element._id}">Accept Order</button>
 					<button class="resp_btn" style="color:red;" id="rej_btn_${element._id}">Reject Order</button>
-					<script>
-						document.getElementById("acc_btn_${element._id}").disabled = active;
-						document.getElementById("rej_btn_${element._id}").disabled = active;
-					</script>
 				</p>
 				`);
 			}
@@ -76,8 +66,8 @@ $(document).ready(() => {
 							<button class="resp_btn" id="acc_btn_${element._id}" style="color:green;" >Accept Order</button>
 							<button class="resp_btn" id="rej_btn_${element._id}" style="color:red;" >Reject Order</button>
 							<script>
-								document.getElementById("acc_btn_${element._id}").disabled = active;
-								document.getElementById("rej_btn_${element._id}").disabled = active;
+								$('#rej_btn_${element._id}').prop('disabled', ${active});
+								$('#acc_btn_${element._id}').prop('disabled', ${active});
 							</script>
 						</p>
 						`);
@@ -92,8 +82,8 @@ $(document).ready(() => {
 							<button class="resp_btn" style="color:green;" id="acc_btn_${element._id}">Accept Order</button>
 							<button class="resp_btn" style="color:red;" id="rej_btn_${element._id}">Reject Order</button>
 							<script>
-								document.getElementById("acc_btn_${element._id}").disabled = active;
-								document.getElementById("rej_btn_${element._id}").disabled = active;
+								$('#rej_btn_${element._id}').prop('disabled', ${active});
+								$('#acc_btn_${element._id}').prop('disabled', ${active});
 							</script>
 						</p>
 						`);
