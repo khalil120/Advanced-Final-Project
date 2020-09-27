@@ -112,7 +112,7 @@ $(document).ready(() => {
 	});
 
 	$(document).on('click', '.resp_btn_reject', () => {
-		const orderId = $(this).closest('.cars_container').attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id').val();
 		const response = 'Rejected';
 		const order = find(items, orderId);
 
@@ -121,7 +121,7 @@ $(document).ready(() => {
 		console.log('hello');
 
 		if (order !== false) {
-			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderID}`);
+			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
 			if (confirm) {
 				const _id = orderId;
 				const data = { _id, response };
@@ -141,7 +141,7 @@ $(document).ready(() => {
 		}
 	});
 	$(document).on('click', '.resp_btn_accept', () => {
-		const orderId = $(this).closest('.cars_container').attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id').val();
 		const response = 'Accepted';
 		const order = find(items, orderId);
 
