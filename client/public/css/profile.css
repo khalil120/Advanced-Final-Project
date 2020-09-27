@@ -24,7 +24,7 @@
 .resp_btn_reject{/*red button*/
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 30px;
-    width: 140px;
+    width: 80px;
     color: grey;
     background-color: red;
     margin-top: 20px;
@@ -35,7 +35,7 @@
 .resp_btn_accept{/*red button*/
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 30px;
-    width: 140px;
+    width: 80px;
     color: grey;
     background-color: green;
     margin-top: 20px;
