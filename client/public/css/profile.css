@@ -25,7 +25,8 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 30px;
     width: 140px;
-    color: red;
+    color: grey;
+    background-color: red;
     margin-top: 20px;
     margin-left: 120px;
     border-radius: 10px 10px 10px 10px;
@@ -35,8 +36,9 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     height: 30px;
     width: 140px;
-    color: green;
+    color: grey;
+    background-color: green;
     margin-top: 20px;
-    margin-left: 120px;
+    margin-left: 60px;
     border-radius: 10px 10px 10px 10px;
 }

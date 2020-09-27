@@ -102,6 +102,10 @@ $(document).ready(() => {
 	$(document).on('click', '.btn-submit', function () {
 		const giganotosaurus = $(this).closest('.cars_container').attr('id');
 		const quetzal = $(this).closest('.cars_container').parent().attr('id');
+
+		console.log(`giganotosaurus is: ${giganotosaurus}`);
+		console.log(`quetzal is: ${quetzal}`);
+
 		let paraceratherium;
 		let pteranodon = 'r';
 		if (quetzal.includes('s'))pteranodon = 's';
