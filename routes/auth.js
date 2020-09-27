@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
@@ -130,6 +131,20 @@ function sendInOrdersCollection(req, res) {
 	});
 }
 
+function updateOrderStatus(req, res) {
+	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+		assert.ifError(err);
+		const db = client.db(dbName);
+		const collection = db.collection('orders');
+
+		const oid = req.body._id;
+		const res = req.body.response;
+
+		collection.findOneAndUpdate({ _id: oid }, { response: res });
+		res.sendStatus(200);
+	});
+}
+
 router.post('/login', (req, res) => {
 	if (!req.body) { // make sure request body exist
 		return res.sendStatus(400);
@@ -156,6 +171,9 @@ router.get('/client-out-orders', (req, res) => {
 });
 router.get('/client-in-orders', (req, res) => {
 	sendInOrdersCollection(req, res);
+});
+router.get('/order-response', (req, res) => {
+	updateOrderStatus(req, res);
 });
 router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout
