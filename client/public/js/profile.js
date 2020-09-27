@@ -2,8 +2,7 @@
 /* eslint-disable no-array-constructor */
 /* eslint-disable no-underscore-dangle */
 
-const buyInOrders = new Array();
-const rentInOrders = new Array();
+const items = new Array();
 
 $(document).ready(() => {
 	$.get('/client-sale-collection').done((data, status) => {
@@ -68,9 +67,9 @@ $(document).ready(() => {
 			// if the request response is not yet enable the buttons
 			const active = (element.response === 'not yet');
 			if (element.action === 'sale') {
-				buyInOrders.push(element);
+				items.push(element);
 				// element._id is equal to the order id and diffrent from carID
-				$('#client-receive-sale-request').append(`<div class="cars_container id="sale_${element._id}" >
+				$('#client-receive-sale-request').append(`<div class="cars_container id="${element._id}" >
 						<p class="cars_name" >${element.model}</p>
 						<p class="order_type" > <b>Order type: Buy </b></p>
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
@@ -83,8 +82,8 @@ $(document).ready(() => {
 						`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
-				rentInOrders.push(element);
-				$('#client-receive-rent-request').append(`<div class="cars_container id="rent_${element._id}" >
+				items.push(element);
+				$('#client-receive-rent-request').append(`<div class="cars_container id="${element._id}" >
 						<p class="cars_name" >${element.model}</p>
 						<p class="order_type" > <b>Order type: Rent </b></p>
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
@@ -115,20 +114,14 @@ $(document).ready(() => {
 	});
 
 	$(document).on('click', '.resp_btn_reject', () => {
-		const elemId = $(this).closest('.cars_container').attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
-		let ordertype = 'rent';
-		const orderId = elemId.substr(5, elemId.length - 5);// get the order id
-		let order;
-		console.log(`click belong to ${elemId}`);
-		console.log(`clicked button ${this.id}`);
-		if (elemId.includes('sale'))ordertype = 'sale';
+		const order = find(items, orderId);
 
-		if (ordertype === 'buy') order = find(buyInOrders, orderId);
-		else order = find(rentInOrders, orderId);
-
+		console.log(`click belong to ${orderId}`);
 		console.log(order);
 		console.log('hello');
+
 		if (order !== false) {
 			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderID}`);
 			if (confirm) {
@@ -150,17 +143,11 @@ $(document).ready(() => {
 		}
 	});
 	$(document).on('click', '.resp_btn_accept', () => {
-		const elemId = $(this).closest('.cars_container').attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
-		const ordertype = elemId.substr(0, 4); // get the order type (order / rent)
-		const orderId = elemId.substr(5, elemId.length - 5);// get the order id
-		let order;
-		console.log(`click belong to ${elemId}`);
-		console.log(`clicked button ${this.id}`);
+		const order = find(items, orderId);
 
-		if (ordertype === 'buy') order = find(buyInOrders, orderId);
-		else order = find(rentInOrders, orderId);
-
+		console.log(`click belong to ${orderId}`);
 		console.log(order);
 		console.log('hello');
 
