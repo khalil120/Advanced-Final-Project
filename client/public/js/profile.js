@@ -121,7 +121,7 @@ $(document).ready(() => {
 		console.log('hello');
 
 		if (order !== false) {
-			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderID}`);
+			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
 			if (confirm) {
 				const _id = orderId;
 				const data = { _id, response };
