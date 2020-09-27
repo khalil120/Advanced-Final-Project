@@ -204,6 +204,10 @@ router.post('/delete-car', (req, res) => {
 	}
 	deleteCar(req, res);
 });
+
+router.get('/order-response', (req, res) => {
+	updateOrderStatus(req, res);
+});
 router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout
 
