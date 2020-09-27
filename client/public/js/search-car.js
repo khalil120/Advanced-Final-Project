@@ -124,7 +124,7 @@ function orderNow(index) {
 			alert('an error accured try again later...');
 		});
 	} else {
-		window.alert('your Order Canceld...');
+		window.alert('your Order have been canceled.');
 	}
 }
 
