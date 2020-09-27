@@ -126,7 +126,7 @@ $(document).ready(() => {
 		const ordertype = elemId.substr(0, 4); // get the order type (order / rent)
 		const orderId = elemId.substr(5, elemId.length - 5);// get the order id
 		let order;
-
+		console.log(`click belong to ${elemId}`);
 		console.log(`clicked button ${this.id}`);
 
 		if (ordertype === 'buy') order = find(buyInOrders, orderId);
