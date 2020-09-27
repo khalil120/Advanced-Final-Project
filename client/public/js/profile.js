@@ -44,7 +44,7 @@ $(document).ready(() => {
 				<p class="order_type" > <b>Order type: Buy </b></p>
 				<p class="car_owner" > <b>car owner:  ${element.owner} </b></p>
 				<p class="order_status" ><b>Order Status: ${element.response}</b></p>
-				`);
+				</div>`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-request-car-rent').append(`<div class="cars_container id="${element._id}" >
@@ -52,7 +52,7 @@ $(document).ready(() => {
 				<p class="order_type" > <b>Order type: Rent </b></p>
 				<p class="car_owner" > <b>car owner:  ${element.owner} </b></p>
 				<p class="order_status" ><b>Order Status: ${element.response}</b></p>
-				`);
+				</div>`);
 			}
 		});
 	}).fail((err) => {
@@ -76,7 +76,7 @@ $(document).ready(() => {
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
 						<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
 						<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
-						`);
+						</div>`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
 				items.push(element);
@@ -87,7 +87,7 @@ $(document).ready(() => {
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
 						<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
 						<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
-						`);
+						</div>`);
 			}
 		});
 	}).fail((err) => {
