@@ -74,11 +74,8 @@ $(document).ready(() => {
 						<p class="order_type" > <b>Order type: Buy </b></p>
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
-						<p>
-							<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
-							<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
-							
-						</p>
+						<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
+						<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
 						`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
@@ -88,11 +85,8 @@ $(document).ready(() => {
 						<p class="order_type" > <b>Order type: Rent </b></p>
 						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
 						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
-						<p>
-							<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
-							<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
-	
-						</p>
+						<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
+						<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
 						`);
 			}
 		});
@@ -118,7 +112,7 @@ $(document).ready(() => {
 	});
 
 	$(document).on('click', '.resp_btn_reject', () => {
-		const orderId = $(this).closest('.cars_container').parent().attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
 		const order = find(items, orderId);
 
@@ -147,7 +141,7 @@ $(document).ready(() => {
 		}
 	});
 	$(document).on('click', '.resp_btn_accept', () => {
-		const orderId = $(this).closest('.cars_container').parent().attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
 		const order = find(items, orderId);
 
