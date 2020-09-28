@@ -73,18 +73,18 @@ $(document).ready(() => {
 						<p class="order_type">Order type: Buy</p>
 						<p class="car_owner">Request from:  ${element.username}</p>
 						<p class="order_status">Order Status: ${element.response}</p>
-						<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
-						<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
+						<button class="resp_btn">Accept Order</button>
+						<button class="resp_btn">Reject Order</button>
 						</div>`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
-				$('#client-receive-rent-request').append(`<div class="cars_container" id="${element._id}" >
+				$('#client-receive-rent-request').append(`<div class="cars_container"id="${element._id}" >
 						<p class="cars_name">${element.model}</p>
 						<p class="order_type">Order type: Rent</p>
 						<p class="car_owner">Request from:  ${element.username}</p>
 						<p class="order_status">Order Status: ${element.response}</p>
-						<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
-						<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
+						<button class="resp_btn_accept">Accept Order</button>
+						<button class="resp_btn_reject">Reject Order</button>
 						</div>`);
 			}
 		});
@@ -109,47 +109,71 @@ $(document).ready(() => {
 		});
 	});
 
-	$(document).on('click', '.resp_btn_reject', () => {
-		const _id = $(this).closest('.cars_container').attr('id');
+	$(document).on('click', '.resp_btn_reject', function () {
+		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
+		const order = find(items, orderId);
+		console.log($('#client-receive-rent-request').html());
+		console.log(`click belong to ${orderId}`);
+		console.log(order);
+		console.log('hello');
 
-		console.log(`click belong to ${_id}`);
-
-		const confirm = window.confirm(`Are you sure you want to ${response} order: ${_id}`);
-		if (confirm) {
-			const data = { _id, response };
-			$.post('/order-response', data, 'json').done((res) => {
-				window.alert(`Order status changed to ${response}`);
-				// disable the buttons after confirm/reject the order
-				$(`#rej_btn_${orderId}`).prop('disabled', true);
-				$(`#acc_btn_${orderId}`).prop('disabled', true);
-			}).fail((res) => {
-				window.alert('Cant update order status try again late');
-			});
+		if (order !== false) {
+			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
+			if (confirm) {
+				const _id = orderId;
+				const data = { _id, response };
+				$.post('/order-response', data, 'json').done((res) => {
+					window.alert(`Order status changed to ${response}`);
+					// disable the buttons after confirm/reject the order
+					$(`#rej_btn_${orderId}`).prop('disabled', true);
+					$(`#acc_btn_${orderId}`).prop('disabled', true);
+				}).fail((res) => {
+					window.alert('Cant update order status try again late');
+				});
+			} else {
+				alert('Aborting...');
+			}
 		} else {
-			alert('Aborting...');
+			alert('cant find the order try again later');
 		}
 	});
-	$(document).on('click', '.resp_btn_accept', () => {
+	$(document).on('click', '.resp_btn_accept', function () {
+		console.log('object is: ');
 		console.log($(this).closest('.cars_container'));
-		const _id = $(this).closest('.cars_container').attr('id');
+		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
+		const order = find(items, orderId);
 
-		console.log(`click belong to ${_id}`);
+		console.log(`click belong to ${orderId}`);
+		console.log(order);
+		console.log('hello2');
 
-		const confirm = window.confirm(`Are you sure you want to ${response} order: ${_id}`);
-		if (confirm) {
-			const data = { _id, response };
-			$.post('/order-response', data, 'json').done((res) => {
-				window.alert(`Order status changed to ${response}`);
-				// disable the buttons after confirm/reject the order
-				$(`#rej_btn_${orderId}`).prop('disabled', true);
-				$(`#acc_btn_${orderId}`).prop('disabled', true);
-			}).fail((res) => {
-				window.alert('Cant update order status try again late');
-			});
+		if (order !== false) {
+			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
+			if (confirm) {
+				const _id = orderId;
+				const data = { _id, response };
+				$.post('/order-response', data, 'json').done((res) => {
+					window.alert(`Order status changed to ${response}`);
+					// disable the buttons after confirm/reject the order
+					$(`#rej_btn_${orderId}`).prop('disabled', true);
+					$(`#acc_btn_${orderId}`).prop('disabled', true);
+				}).fail((res) => {
+					window.alert('Cant update order status try again late');
+				});
+			} else {
+				alert('Aborting...');
+			}
 		} else {
-			alert('Aborting...');
+			alert('cant find the order try again later');
 		}
 	});
 });
+
+function find(arr, value) {
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i]._id == value) { return arr[i]; }
+	}
+	return false;
+}
