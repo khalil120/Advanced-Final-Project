@@ -69,20 +69,20 @@ $(document).ready(() => {
 			if (element.action === 'sale') {
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-receive-sale-request').append(`<div class="cars_container id="${element._id}" >
-						<p class="cars_name" id="5">${element.model}</p>
-						<p class="order_type" id="6"> <b>Order type: Buy </b></p>
-						<p class="car_owner" id="7"> <b>Request from:  ${element.username} </b></p>
-						<p class="order_status"id="8" ><b>Order Status: ${element.response}</b></p>
+						<p class="cars_name">${element.model}</p>
+						<p class="order_type"> <b>Order type: Buy </b></p>
+						<p class="car_owner"> <b>Request from:  ${element.username} </b></p>
+						<p class="order_status"><b>Order Status: ${element.response}</b></p>
 						<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
 						<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
 						</div>`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-receive-rent-request').append(`<div class="cars_container id="${element._id}" >
-						<p class="cars_name"  id="1">${element.model}</p>
-						<p class="order_type id="2"" > <b>Order type: Rent </b></p>
-						<p class="car_owner" id="3"> <b>Request from:  ${element.username} </b></p>
-						<p class="order_status" id="4"><b>Order Status: ${element.response}</b></p>
+						<p class="cars_name">${element.model}</p>
+						<p class="order_type"> <b>Order type: Rent </b></p>
+						<p class="car_owner"> <b>Request from:  ${element.username} </b></p>
+						<p class="order_status"><b>Order Status: ${element.response}</b></p>
 						<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
 						<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
 						</div>`);
@@ -110,6 +110,8 @@ $(document).ready(() => {
 	});
 
 	$(document).on('click', '.resp_btn_reject', () => {
+		console.log('object is: ');
+		console.log(this);
 		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
 		const order = find(items, orderId);
@@ -139,6 +141,8 @@ $(document).ready(() => {
 		}
 	});
 	$(document).on('click', '.resp_btn_accept', () => {
+		console.log('object is: ');
+		console.log(this);
 		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
 		const order = find(items, orderId);
