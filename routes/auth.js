@@ -158,8 +158,10 @@ function deleteCar(req, res) {
 }
 
 function updateOrderStatus(req, res) {
+	console.log('outside connect');
 	MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 		assert.ifError(err);
+		console.log('hellow');
 		const db = client.db(dbName);
 		const collection = db.collection('orders');
 
@@ -172,6 +174,7 @@ function updateOrderStatus(req, res) {
 		collection.findOneAndUpdate({ _id: oid }, { response: resp });
 		res.sendStatus(200);
 	});
+	console.log('bye bye');
 }
 
 router.post('/login', (req, res) => {
@@ -210,6 +213,7 @@ router.post('/delete-car', (req, res) => {
 
 router.get('/order-response', (req, res) => {
 	updateOrderStatus(req, res);
+	console.log('done');
 });
 router.get('/logout', authorized, (req, res) => {
 	// remove the cookie to perform a logout
