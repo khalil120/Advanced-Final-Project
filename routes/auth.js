@@ -163,12 +163,13 @@ function updateOrderStatus(req, res) {
 		const db = client.db(dbName);
 		const collection = db.collection('orders');
 
+		console.log('the request body is: ');
 		console.log(req.body);
 
 		const oid = req.body._id;
-		const res = req.body.response;
+		const resp = req.body.response;
 
-		collection.findOneAndUpdate({ _id: oid }, { response: res });
+		collection.findOneAndUpdate({ _id: oid }, { response: resp });
 		res.sendStatus(200);
 	});
 }
