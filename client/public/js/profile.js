@@ -111,7 +111,7 @@ $(document).ready(() => {
 
 	$(document).on('click', '.resp_btn_reject', () => {
 		console.log('object is: ');
-		console.log(this);
+		console.log($(this).closest('.cars_container').attr('id'));
 		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
 		const order = find(items, orderId);
@@ -142,7 +142,7 @@ $(document).ready(() => {
 	});
 	$(document).on('click', '.resp_btn_accept', () => {
 		console.log('object is: ');
-		console.log(this);
+		console.log($(this).closest('.cars_container').attr('id'));
 		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
 		const order = find(items, orderId);
