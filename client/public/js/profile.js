@@ -6,7 +6,6 @@ const items = new Array();
 
 $(document).ready(() => {
 	$.get('/client-sale-collection').done((data, status) => {
-		console.log(data);
 		$.each(data, (index, item) => {
 			$('#client-upload-car-sale').append(`<div class="cars_container" id="${item.filename}">
 					<img class="cars_image" src="/img/${item.filename}" height="150" width="100%"/>
@@ -19,7 +18,6 @@ $(document).ready(() => {
 		console.log('error');
 	});
 	$.get('/client-rent-collection').done((data, status) => {
-		console.log(data);
 		$.each(data, (index, item) => {
 			$('#client-upload-car-rent').append(`<div class="cars_container" id="${item.filename}">
 					<img class="cars_image" src="/img/${item.filename}" height="150" width="100%"/>
@@ -61,30 +59,30 @@ $(document).ready(() => {
 	$.get('/client-in-orders').done((data, status) => {
 		// user income orders
 		console.log('income orders: ');
-		console.log(data);
 
 		$.each(data, (index, element) => {
 			// if the request response is not yet enable the buttons
+			console.log(element);
+			console.log(`order id: ${element._id}`);
+			items.push(element);
 			const active = (element.response === 'not yet');
 			if (element.action === 'sale') {
-				items.push(element);
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-receive-sale-request').append(`<div class="cars_container id="${element._id}" >
-						<p class="cars_name" >${element.model}</p>
-						<p class="order_type" > <b>Order type: Buy </b></p>
-						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
-						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
+						<p class="cars_name" id="5">${element.model}</p>
+						<p class="order_type" id="6"> <b>Order type: Buy </b></p>
+						<p class="car_owner" id="7"> <b>Request from:  ${element.username} </b></p>
+						<p class="order_status"id="8" ><b>Order Status: ${element.response}</b></p>
 						<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
 						<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
 						</div>`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
-				items.push(element);
 				$('#client-receive-rent-request').append(`<div class="cars_container id="${element._id}" >
-						<p class="cars_name" >${element.model}</p>
-						<p class="order_type" > <b>Order type: Rent </b></p>
-						<p class="car_owner" > <b>Request from:  ${element.username} </b></p>
-						<p class="order_status" ><b>Order Status: ${element.response}</b></p>
+						<p class="cars_name"  id="1">${element.model}</p>
+						<p class="order_type id="2"" > <b>Order type: Rent </b></p>
+						<p class="car_owner" id="3"> <b>Request from:  ${element.username} </b></p>
+						<p class="order_status" id="4"><b>Order Status: ${element.response}</b></p>
 						<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
 						<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
 						</div>`);
