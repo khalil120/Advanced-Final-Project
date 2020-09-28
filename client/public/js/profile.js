@@ -111,7 +111,7 @@ $(document).ready(() => {
 
 	$(document).on('click', '.resp_btn_reject', () => {
 		console.log('object is: ');
-		console.log($(this).closest('.cars_container'));
+		console.log($(this).closest('.cars_container').get());
 		const orderId = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
 		const order = find(items, orderId);
