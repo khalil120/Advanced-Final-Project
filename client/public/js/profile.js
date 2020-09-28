@@ -70,9 +70,9 @@ $(document).ready(() => {
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-receive-sale-request').append(`<div class="cars_container id="${element._id}" >
 						<p class="cars_name">${element.model}</p>
-						<p class="order_type"> <b>Order type: Buy </b></p>
-						<p class="car_owner"> <b>Request from:  ${element.username} </b></p>
-						<p class="order_status"><b>Order Status: ${element.response}</b></p>
+						<p class="order_type">Order type: Buy</p>
+						<p class="car_owner">Request from:  ${element.username}</p>
+						<p class="order_status">Order Status: ${element.response}</p>
 						<button class="resp_btn" id="acc_btn_${element._id}" >Accept Order</button>
 						<button class="resp_btn" id="rej_btn_${element._id}" >Reject Order</button>
 						</div>`);
@@ -80,9 +80,9 @@ $(document).ready(() => {
 				// element._id is equal to the order id and diffrent from carID
 				$('#client-receive-rent-request').append(`<div class="cars_container id="${element._id}" >
 						<p class="cars_name">${element.model}</p>
-						<p class="order_type"> <b>Order type: Rent </b></p>
-						<p class="car_owner"> <b>Request from:  ${element.username} </b></p>
-						<p class="order_status"><b>Order Status: ${element.response}</b></p>
+						<p class="order_type">Order type: Rent</p>
+						<p class="car_owner">Request from:  ${element.username}</p>
+						<p class="order_status">Order Status: ${element.response}</p>
 						<button class="resp_btn_accept" id="acc_btn_${element._id}">Accept Order</button>
 						<button class="resp_btn_reject" id="rej_btn_${element._id}">Reject Order</button>
 						</div>`);
