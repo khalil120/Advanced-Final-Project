@@ -110,14 +110,13 @@ $(document).ready(() => {
 	});
 
 	$(document).on('click', '.resp_btn_reject', () => {
-		const orderId = $(this).closest('.cars_container').attr('id');
+		const _id = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
 
-		console.log(`click belong to ${orderId}`);
+		console.log(`click belong to ${_id}`);
 
-		const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
+		const confirm = window.confirm(`Are you sure you want to ${response} order: ${_id}`);
 		if (confirm) {
-			const _id = orderId;
 			const data = { _id, response };
 			$.post('/order-response', data, 'json').done((res) => {
 				window.alert(`Order status changed to ${response}`);
@@ -132,14 +131,14 @@ $(document).ready(() => {
 		}
 	});
 	$(document).on('click', '.resp_btn_accept', () => {
-		const orderId = $(this).closest('.cars_container').attr('id');
+		console.log($(this).closest('.cars_container'));
+		const _id = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
 
-		console.log(`click belong to ${orderId}`);
+		console.log(`click belong to ${_id}`);
 
-		const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
+		const confirm = window.confirm(`Are you sure you want to ${response} order: ${_id}`);
 		if (confirm) {
-			const _id = orderId;
 			const data = { _id, response };
 			$.post('/order-response', data, 'json').done((res) => {
 				window.alert(`Order status changed to ${response}`);
