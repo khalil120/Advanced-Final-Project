@@ -110,70 +110,45 @@ $(document).ready(() => {
 	});
 
 	$(document).on('click', '.resp_btn_reject', function () {
-		const orderId = $(this).closest('.cars_container').attr('id');
+		const _id = $(this).closest('.cars_container').attr('id');
 		const response = 'Rejected';
-		const order = find(items, orderId);
-		console.log($('#client-receive-rent-request').html());
-		console.log(`click belong to ${orderId}`);
-		console.log(order);
-		console.log('hello');
 
-		if (order !== false) {
-			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
-			if (confirm) {
-				const _id = orderId;
-				const data = { _id, response };
-				$.post('/order-response', data, 'json').done((res) => {
-					window.alert(`Order status changed to ${response}`);
-					// disable the buttons after confirm/reject the order
-					$(`#rej_btn_${orderId}`).prop('disabled', true);
-					$(`#acc_btn_${orderId}`).prop('disabled', true);
-				}).fail((res) => {
-					window.alert('Cant update order status try again late');
-				});
-			} else {
-				alert('Aborting...');
-			}
+		console.log(`click belong to ${_id}`);
+
+		const confirm = window.confirm(`Are you sure you want to ${response} order: ${_id}`);
+		if (confirm) {
+			const data = { _id, response };
+			$.post('/order-response', data, 'json').done((res) => {
+				window.alert(`Order status changed to ${response}`);
+				// disable the buttons after confirm/reject the order
+				$(`#rej_btn_${orderId}`).prop('disabled', true);
+				$(`#acc_btn_${orderId}`).prop('disabled', true);
+			}).fail((res) => {
+				window.alert('Cant update order status try again late');
+			});
 		} else {
-			alert('cant find the order try again later');
+			alert('Aborting...');
 		}
 	});
 	$(document).on('click', '.resp_btn_accept', function () {
-		console.log('object is: ');
-		console.log($(this).closest('.cars_container'));
-		const orderId = $(this).closest('.cars_container').attr('id');
+		const _id = $(this).closest('.cars_container').attr('id');
 		const response = 'Accepted';
-		const order = find(items, orderId);
 
-		console.log(`click belong to ${orderId}`);
-		console.log(order);
-		console.log('hello2');
+		console.log(`click belong to ${_id}`);
 
-		if (order !== false) {
-			const confirm = window.confirm(`Are you sure you want to ${response} order: ${orderId}`);
-			if (confirm) {
-				const _id = orderId;
-				const data = { _id, response };
-				$.post('/order-response', data, 'json').done((res) => {
-					window.alert(`Order status changed to ${response}`);
-					// disable the buttons after confirm/reject the order
-					$(`#rej_btn_${orderId}`).prop('disabled', true);
-					$(`#acc_btn_${orderId}`).prop('disabled', true);
-				}).fail((res) => {
-					window.alert('Cant update order status try again late');
-				});
-			} else {
-				alert('Aborting...');
-			}
+		const confirm = window.confirm(`Are you sure you want to ${response} order: ${_id}`);
+		if (confirm) {
+			const data = { _id, response };
+			$.post('/order-response', data, 'json').done((res) => {
+				window.alert(`Order status changed to ${response}`);
+				// disable the buttons after confirm/reject the order
+				$(`#rej_btn_${orderId}`).prop('disabled', true);
+				$(`#acc_btn_${orderId}`).prop('disabled', true);
+			}).fail((res) => {
+				window.alert('Cant update order status try again late');
+			});
 		} else {
-			alert('cant find the order try again later');
+			alert('Aborting...');
 		}
 	});
 });
-
-function find(arr, value) {
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i]._id == value) { return arr[i]; }
-	}
-	return false;
-}
