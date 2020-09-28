@@ -73,8 +73,8 @@ $(document).ready(() => {
 						<p class="order_type">Order type: Buy</p>
 						<p class="car_owner">Request from:  ${element.username}</p>
 						<p class="order_status">Order Status: ${element.response}</p>
-						<button class="resp_btn">Accept Order</button>
-						<button class="resp_btn">Reject Order</button>
+						<button class="resp_btn_accept">Accept Order</button>
+						<button class="resp_btn_reject">Reject Order</button>
 						</div>`);
 			} else {
 				// element._id is equal to the order id and diffrent from carID
@@ -83,7 +83,7 @@ $(document).ready(() => {
 						<p class="order_type">Order type: Rent</p>
 						<p class="car_owner">Request from:  ${element.username}</p>
 						<p class="order_status">Order Status: ${element.response}</p>
-						<button class="resp_btn_accept">Accept Order</button>
+						<button class="resp_btn_accept" >Accept Order</button>
 						<button class="resp_btn_reject">Reject Order</button>
 						</div>`);
 			}
@@ -121,8 +121,6 @@ $(document).ready(() => {
 			$.post('/order-response', data, 'json').done((res) => {
 				window.alert(`Order status changed to ${response}`);
 				// disable the buttons after confirm/reject the order
-				$(`#rej_btn_${orderId}`).prop('disabled', true);
-				$(`#acc_btn_${orderId}`).prop('disabled', true);
 			}).fail((res) => {
 				window.alert('Cant update order status try again late');
 			});
@@ -142,8 +140,6 @@ $(document).ready(() => {
 			$.post('/order-response', data, 'json').done((res) => {
 				window.alert(`Order status changed to ${response}`);
 				// disable the buttons after confirm/reject the order
-				$(`#rej_btn_${orderId}`).prop('disabled', true);
-				$(`#acc_btn_${orderId}`).prop('disabled', true);
 			}).fail((res) => {
 				window.alert('Cant update order status try again late');
 			});

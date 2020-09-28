@@ -4,6 +4,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
+const ObjectId = require('mongodb').ObjectID;
 const { authorized, parseUser, anonymouse } = require('../middlewares/auth');
 const { clientSaleCollection, clientRentCollection } = require('./upload');
 
@@ -168,10 +169,10 @@ function updateOrderStatus(req, res) {
 		console.log('the request body is: ');
 		console.log(req.body);
 
-		const oid = req.body._id;
+		const oid1 = req.body._id;
 		const resp = req.body.response;
-
-		collection.findOneAndUpdate({ _id: oid }, { response: resp });
+		const oid = new ObjectId(oid1);
+		collection.updateOne({ _id: oid }, { $set: { response: resp } });
 		res.sendStatus(200);
 	});
 	console.log('bye bye');
@@ -211,7 +212,7 @@ router.post('/delete-car', (req, res) => {
 	deleteCar(req, res);
 });
 
-router.get('/order-response', (req, res) => {
+router.post('/order-response', (req, res) => {
 	updateOrderStatus(req, res);
 	console.log('done');
 });
