@@ -25,12 +25,12 @@ $(document).ready(() => {
 				$.each(res, (index, item) => {
 					items.push(item);
 
-					$(divName).append(`<div class="cars_container" id="${item.filename}">
+					$(divName).append(`<div class="cars_container_sale" id="${item.filename}">
 					<img class="cars_image" src="/img/${item.filename}" height="150" width="100%"/>
 			   		<p class="cars_name" >${item.carModel}</p>
                 	<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 			   		<p class="available" >Available!</p>
-			   		<p class="cars_price" ><b>price:</b>${item.price}</p>
+			   		<p class="cars_price" ><b>${item.price}₪</b></p>
                 	<button class="cars_order" id = "${i}" >Order now</button>
                 	</div>`);
 					$('#Price-div').append(item.price);
@@ -67,7 +67,7 @@ $(document).ready(() => {
 					<p class="cars_desc" >${item.seats} Adults, ${item.airBags} bags</p>
 					<p class="cars_leas_date">From Date: ${item.fromDate} to Date: ${item.toDate}</p>
 					<p class="available" >Available!</p>
-					<p class="cars_price" ><b>Price per Day:</b>${item.priceDay}</p>
+					<p class="cars_price" ><b>${item.priceDay}₪ Per day</b></p>
 				 	<button class="cars_order" id = "${i}" >Order now</button>
 					</div>`);
 					$('#Price-div').append(item.priceDay);
