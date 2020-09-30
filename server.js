@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -39,6 +38,9 @@ app.get('/post-car', authorized, (req, res) => {
 });
 app.get('/contact-us', (req, res) => {
 	fs.createReadStream('./client/contact-us.html').pipe(res);
+});
+app.get('/about-us', (req, res) => {
+	fs.createReadStream('./client/about-us.html').pipe(res);
 });
 app.get('/loginMsg', (req, res) => {
 	fs.createReadStream('./client/loginMsg.html').pipe(res);
