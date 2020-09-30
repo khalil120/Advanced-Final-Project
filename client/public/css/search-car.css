@@ -5,12 +5,7 @@
     margin-left: 50px;
 }
 .my-container-client{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: space-around;
     margin-left: 50px;
-
 }
 @media(max-width:500px){
     .my-container{
@@ -32,14 +27,7 @@
     border-radius: 20px;
     box-shadow: 2px 2px 5px grey;
 }
-hr {
-    border: 0;
-    clear: both;
-    display: block;
-    width: 96%;
-    background-color: silver;
-    height: 1px;
-}
+
 .cars_image{
     float: right;
     width: 50%;
@@ -73,16 +61,7 @@ hr {
     margin-left: 120px;
     border-radius: 10px 10px 10px 10px;
 }
-.btn-submit{/*red button*/
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: red;
-    color: white;
-    height: 30px;
-    width: 140px;
-    margin-top: 20px;
-    margin-left: 120px;
-    border-radius: 10px 10px 10px 10px;
-}
+
 .available{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: inherit;
@@ -188,11 +167,12 @@ input {
 @media(max-width: 500px){
     .cars_container {    
         height: 210px;
-        width: 360px;
-        padding-right:40px ;
+        width: 355px;
+        padding-right:45px;
         margin-bottom: 6%;
         position: relative;;
     }
+    
 }
 @media(max-width: 500px){
     .cars_order{
