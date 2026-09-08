@@ -27,7 +27,7 @@
     "jsonwebtoken": "^9.0.0",
     "method-override": "^3.0.0",
     "mongodb": "^3.6.10",
-    "multer": "^2.2.0",
+    "multer": "^2.3.0",
     "multer-gridfs-storage": "^6.1.0"
   },
   "devDependencies": {
